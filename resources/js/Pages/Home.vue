@@ -1,9 +1,20 @@
 <script setup>
+import { Head } from '@inertiajs/vue3';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 
 defineProps({
-	firstProp: String,
-})
+	canLogin: {
+		type: Boolean,
+	},
+	canRegister: {
+		type: Boolean,
+	},
+});
 </script>
+
+<Head title="Homepage" />
 <template>
-	{{ firstProp }}
+	<GuestLayout :props="firstProp">
+		{{ firstProp }}
+	</GuestLayout>
 </template>
