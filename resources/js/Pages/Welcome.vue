@@ -1,17 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 
-defineProps({
-	canLogin: {
-		type: Boolean,
-	},
-	canRegister: {
-		type: Boolean,
-	},
-	firstProp: {
-		type: String
-	}
-});
 
 </script>
 
