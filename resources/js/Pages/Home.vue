@@ -18,7 +18,7 @@ defineProps({
 <Head title="Homepage" />
 <template>
 	<GuestLayout>
-		<h1>Home page</h1>
-		{{ firstProp }}
+		<h1 class="text-xl mb-3">Home page</h1>
+		<strong class="font-black bg-slate-200 p-2">{{ firstProp }}</strong>
 	</GuestLayout>
 </template>

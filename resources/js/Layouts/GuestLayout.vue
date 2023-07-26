@@ -5,9 +5,11 @@ import { Link } from '@inertiajs/vue3';
 
 <template>
 	<Header></Header>
-	<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-		<div class="w-full">
-			<slot />
+	<div class="min-h-screen flex p-2 bg-gray-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+			<div class="w-full">
+				<slot />
+			</div>
 		</div>
 	</div>
 </template>

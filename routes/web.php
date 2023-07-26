@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
 	return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('products', ProductController::class)
+	// ->only(['index', 'store', 'create'])
+	->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {
