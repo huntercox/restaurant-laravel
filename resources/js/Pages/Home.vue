@@ -8,8 +8,8 @@ defineProps({
 	canRegister: {
 		type: Boolean,
 	},
-	firstProp: {
-		type: String
+	products: {
+		type: Object
 	}
 });
 
@@ -19,6 +19,9 @@ defineProps({
 <template>
 	<GuestLayout>
 		<h1 class="text-xl mb-3">Home page</h1>
-		<strong class="font-black bg-slate-200 p-2">{{ firstProp }}</strong>
+		<div v-for="product in products">
+			{{ product.name }}
+			{{ product.price }}
+		</div>
 	</GuestLayout>
 </template>

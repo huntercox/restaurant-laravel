@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Models\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +32,7 @@ Route::get('/', function () {
 	return Inertia::render('Home', [
 		'canLogin' => Route::has('login'),
 		'canRegister' => Route::has('register'),
-		'firstProp' => 'My First Property'
+		'products' => Product::with('user:id,name')->latest()->get(),
 	]);
 });
 
