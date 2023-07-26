@@ -29,26 +29,30 @@ use App\Models\Product;
 // });
 
 Route::get('/', function () {
-	return Inertia::render('Home', [
-		'canLogin' => Route::has('login'),
-		'canRegister' => Route::has('register'),
-		'products' => Product::with('user:id,name')->latest()->get(),
-	]);
+    return Inertia::render('Home', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'products' => Product::with('user:id,name')->latest()->get(),
+    ]);
 });
 
+Route::get('/menu', function () {
+    return Inertia::render('Menu');
+})->name('menu');
+
 Route::get('/dashboard', function () {
-	return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('products', ProductController::class)
-	// ->only(['index', 'store', 'create'])
-	->middleware(['auth', 'verified']);
+    // ->only(['index', 'store', 'create'])
+    ->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {
-	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
