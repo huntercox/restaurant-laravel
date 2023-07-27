@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,12 +32,13 @@ Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'products' => Product::with('user:id,name')->latest()->get(),
     ]);
 });
 
 Route::get('/menu', function () {
-    return Inertia::render('Menu');
+    return Inertia::render('Menu', [
+        'products' => Product::with('user:id,name')->latest()->get()
+    ]);
 })->name('menu');
 
 Route::get('/dashboard', function () {
