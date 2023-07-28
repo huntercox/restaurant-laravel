@@ -1,9 +1,9 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import GuestLayout from '@/Customer/Layouts/GuestLayout.vue';
+import InputError from '@/Customer/Components/InputError.vue';
+import InputLabel from '@/Customer/Components/InputLabel.vue';
+import PrimaryButton from '@/Customer/Components/PrimaryButton.vue';
+import TextInput from '@/Customer/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
@@ -14,7 +14,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('register'), {
+    form.post(route('auth.register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
@@ -88,7 +88,7 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link
-                    :href="route('login')"
+                    :href="route('auth.login')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                     Already registered?

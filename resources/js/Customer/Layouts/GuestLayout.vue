@@ -1,5 +1,5 @@
 <script setup>
-import Header from '@/Components/Header.vue';
+import Header from '@/Customer/Components/Header.vue';
 import { Link } from '@inertiajs/vue3';
 </script>
 

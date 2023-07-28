@@ -1,5 +1,5 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import ApplicationLogo from '@/Customer/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 </script>
 
@@ -59,7 +59,7 @@ import { Link } from '@inertiajs/vue3';
 
 									<template #content>
 										<DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-										<DropdownLink :href="route('logout')" method="post" as="button">
+										<DropdownLink :href="route('auth.logout')" method="post" as="button">
 											Log Out
 										</DropdownLink>
 									</template>

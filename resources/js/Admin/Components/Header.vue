@@ -1,5 +1,5 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import ApplicationLogo from '@/Admin/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 </script>
 
@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/vue3';
 
                             <!-- Main Navigation -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center self-center justify-start">
-                                <Link :href="route('menu')" :active="route().current()"
+                                <Link :href="route('admin.menu')" :active="route().current()"
                                     class="text-white font-bold px-2 hover:text-gray-700">
                                 Menu
                                 </Link>
@@ -30,7 +30,7 @@ import { Link } from '@inertiajs/vue3';
                             <!-- Utility Nav -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center bg-gray-200 self-start justify-end">
-                                <Link :href="route('dashboard')" :active="route().current('dashboard')"
+                                <Link :href="route('admin.dashboard')" :active="route().current('dashboard')"
                                     class="text-gray-900 font-bold px-2 hover:text-gray-700">
                                 Login
                                 </Link>
@@ -58,8 +58,8 @@ import { Link } from '@inertiajs/vue3';
 									</template>
 
 									<template #content>
-										<DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-										<DropdownLink :href="route('logout')" method="post" as="button">
+										<DropdownLink :href="route('admin.profile.edit')"> Profile </DropdownLink>
+										<DropdownLink :href="route('admin.logout')" method="post" as="button">
 											Log Out
 										</DropdownLink>
 									</template>

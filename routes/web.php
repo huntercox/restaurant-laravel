@@ -1,61 +1,89 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Customer\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Customer\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Customer\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Customer\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Customer\Auth\NewPasswordController;
+use App\Http\Controllers\Customer\Auth\PasswordController;
+use App\Http\Controllers\Customer\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Customer\Auth\RegisteredUserController;
+use App\Http\Controllers\Customer\Auth\VerifyEmailController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\DashboardController;
+use App\Http\Controllers\Customer\MenuController;
+use App\Http\Controllers\Customer\OrderController;
+use App\Http\Controllers\Customer\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-use App\Models\Product;
+Route::middleware('guest')->group(function () {
+    Route::as('auth.')->group(function () {
+        Route::get('/register', [RegisteredUserController::class, 'create'])
+            ->name('register');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+        Route::post('/register', [RegisteredUserController::class, 'store']);
 
-// Route::get('/', function () {
-// 	return Inertia::render('Welcome', [
-// 		'canLogin' => Route::has('login'),
-// 		'canRegister' => Route::has('register'),
-// 		'laravelVersion' => Application::VERSION,
-// 		'phpVersion' => PHP_VERSION,
-// 	]);
-// });
+        Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+            ->name('login');
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
+        Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+        Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+            ->name('password.request');
+
+        Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+            ->name('password.email');
+
+        Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+            ->name('password.reset');
+
+        Route::post('/reset-password', [NewPasswordController::class, 'store'])
+            ->name('password.store');
+    });
 });
-
-Route::get('/menu', function () {
-    return Inertia::render('Menu', [
-        'products' => Product::with('user:id,name')->latest()->get()
-    ]);
-})->name('menu');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-Route::resource('products', ProductController::class)
-    // ->only(['index', 'store', 'create'])
-    ->middleware(['auth', 'verified']);
-
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::as('auth.')->group(function () {
+        Route::get('/verify-email', EmailVerificationPromptController::class)
+            ->name('verification.notice');
+
+        Route::middleware(['throttle:6,1'])->group(function () {
+            Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+                ->middleware(['signed'])
+                ->name('verification.verify');
+
+            Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+                ->name('verification.send');
+        });
+
+        Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
+            ->name('password.confirm');
+
+        Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']);
+
+        Route::put('/password', [PasswordController::class, 'update'])
+            ->name('password.update');
+
+        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->name('logout');
+    });
+
+    Route::get('/cart', [CartController::class, 'edit'])
+        ->name('cart');
+    Route::post('/cart', [CartController::class, 'update']);
+    Route::delete('/cart', [CartController::class, 'destroy']);
+
+    Route::get('/menu', MenuController::class)
+        ->name('menu');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile');
+    Route::post('/profile', [ProfileController::class, 'update']);
+    Route::delete('/profile', [ProfileController::class, 'destroy']);
+
+    Route::get('/orders', OrderController::class)
+        ->name('orders');
 });
 
-require __DIR__ . '/admin.php';
+Route::get('/', DashboardController::class)
+    ->name('dashboard');

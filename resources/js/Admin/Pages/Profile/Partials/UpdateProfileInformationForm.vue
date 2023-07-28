@@ -1,8 +1,8 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Admin/Components/InputError.vue';
+import InputLabel from '@/Admin/Components/InputLabel.vue';
+import PrimaryButton from '@/Admin/Components/PrimaryButton.vue';
+import TextInput from '@/Admin/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 defineProps({
@@ -32,7 +32,7 @@ const form = useForm({
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.patch(route('admin.profile.update'))" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" value="Name" />
 
@@ -68,7 +68,7 @@ const form = useForm({
                 <p class="text-sm mt-2 text-gray-800">
                     Your email address is unverified.
                     <Link
-                        :href="route('verification.send')"
+                        :href="route('admin.verification.send')"
                         method="post"
                         as="button"
                         class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
