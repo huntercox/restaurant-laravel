@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -22,7 +19,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user = User::create([
-            'nick' => 'Hunter',
+            'name' => 'Hunter',
             'email' => 'hunter@laravel.com',
             'password' => Hash::make('hunter@laravel.com')
         ]);

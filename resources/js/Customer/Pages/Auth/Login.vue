@@ -1,10 +1,10 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Checkbox from '@/Customer/Components/Checkbox.vue';
+import GuestLayout from '@/Customer/Layouts/GuestLayout.vue';
+import InputError from '@/Customer/Components/InputError.vue';
+import InputLabel from '@/Customer/Components/InputLabel.vue';
+import PrimaryButton from '@/Customer/Components/PrimaryButton.vue';
+import TextInput from '@/Customer/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('auth.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -33,6 +33,12 @@ const submit = () => {
     <GuestLayout>
 
         <Head title="Customer Log in" />
+
+
+        <!-- Page Heading -->
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $page.url }}
+        </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -65,7 +71,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')"
+                <Link v-if="canResetPassword" :href="route('auth.password.request')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Forgot your password?
                 </Link>

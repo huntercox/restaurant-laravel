@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import GuestLayout from '@/Customer/Layouts/GuestLayout.vue';
 defineProps({
     canLogin: {
         type: Boolean,
@@ -8,7 +8,7 @@ defineProps({
     canRegister: {
         type: Boolean,
     },
-    products: {
+    menuItems: {
         type: Object
     }
 });
@@ -19,9 +19,9 @@ defineProps({
 <template>
     <GuestLayout>
         <h1 class="text-xl mb-3">Menu page</h1>
-        <div v-for="product in products">
-            {{ product.name }}
-            {{ product.price }}
+
+        <div v-for="menuItem in menuItems">
+            {{ menuItem.name }}
         </div>
     </GuestLayout>
 </template>

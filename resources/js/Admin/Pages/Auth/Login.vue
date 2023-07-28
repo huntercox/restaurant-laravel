@@ -1,10 +1,10 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Checkbox from '@/Admin/Components/Checkbox.vue';
+import GuestLayout from '@/Admin/Layouts/GuestLayout.vue';
+import InputError from '@/Admin/Components/InputError.vue';
+import InputLabel from '@/Admin/Components/InputLabel.vue';
+import PrimaryButton from '@/Admin/Components/PrimaryButton.vue';
+import TextInput from '@/Admin/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('admin.auth.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -65,7 +65,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')"
+                <Link v-if="canResetPassword" :href="route('admin.auth.password.request')"
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Forgot your password?
                 </Link>
