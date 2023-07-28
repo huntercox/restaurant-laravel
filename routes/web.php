@@ -10,7 +10,7 @@ use App\Http\Controllers\Customer\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Customer\Auth\RegisteredUserController;
 use App\Http\Controllers\Customer\Auth\VerifyEmailController;
 use App\Http\Controllers\Customer\CartController;
-use App\Http\Controllers\Customer\DashboardController;
+use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProfileController;
@@ -85,5 +85,6 @@ Route::middleware('auth')->group(function () {
         ->name('orders');
 });
 
-Route::get('/', DashboardController::class)
-    ->name('dashboard');
+
+Route::get('/', HomeController::class)
+    ->name('home');

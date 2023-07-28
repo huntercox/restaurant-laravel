@@ -1,6 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Customer/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
+import ResponsiveNavLink from "@/Customer/Components/ResponsiveNavLink.vue";
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
             <nav class="bg-red-500 border-b border-gray-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="h-16">
-                        <div class="flex justify-between w-full h-full">
+                        <div class="flex justify-between w-full h-full align-center">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center justify-between">
                                 <Link href="/">
@@ -20,20 +21,35 @@ import { Link } from '@inertiajs/vue3';
 
 
                             <!-- Main Navigation -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center self-center justify-start">
+                            <nav
+                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center self-center justify-start grow-1">
                                 <Link :href="route('menu')" :active="route().current()"
                                     class="text-white font-bold px-2 hover:text-gray-700">
                                 Menu
                                 </Link>
-                            </div>
 
-                            <!-- Utility Nav -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center bg-gray-200 self-start justify-end">
-                                <Link :href="route('dashboard')" :active="route().current('dashboard')"
-                                    class="text-gray-900 font-bold px-2 hover:text-gray-700">
-                                Login
+                                <Link href="#" class="text-white font-bold px-2 hover:text-gray-700">
+                                Start Order
                                 </Link>
+                            </nav>
+
+                            <div class="self-end align-end">
+                                <div class="flex align-center">
+                                    <template v-if="$page.props.auth.user">
+                                        <div class="py-5">
+                                            {{ $page.props.auth.user.name }}
+                                        </div>
+
+                                        <ResponsiveNavLink :href="route('auth.logout')" method="post" as="button">
+                                            Log Out
+                                        </ResponsiveNavLink>
+                                    </template>
+                                    <div v-else>
+                                        <ResponsiveNavLink :href="route('auth.login')" method="post" as="button">
+                                            Log In
+                                        </ResponsiveNavLink>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

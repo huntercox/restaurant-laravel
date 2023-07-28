@@ -10,7 +10,8 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\HomeController;
+
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\OrderController;
@@ -73,8 +74,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('/customers', CustomerController::class)
             ->except(['create', 'store', 'show']);
 
-        Route::get('/home', HomeController::class)
-            ->name('home');
+        Route::get('/dashboard', DashboardController::class)
+            ->name('dashboard');
+
 
         Route::resource('/menus', MenuController::class)
             ->except(['show']);

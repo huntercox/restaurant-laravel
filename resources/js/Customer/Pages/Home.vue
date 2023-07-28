@@ -8,20 +8,13 @@ defineProps({
     canRegister: {
         type: Boolean,
     },
-    menuItems: {
-        type: Object
-    }
 });
 
 </script>
 
-<Head title="Menu page" />
+<Head title="Homepage" />
 <template>
     <GuestLayout>
-        <h1 class="text-xl mb-3">Menu page</h1>
-
-        <div v-for="menuItem in menuItems">
-            {{ menuItem.name }}
-        </div>
+        <h1 class="text-xl mb-3">THE Home page</h1>
     </GuestLayout>
 </template>

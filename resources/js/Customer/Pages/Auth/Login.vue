@@ -34,6 +34,12 @@ const submit = () => {
 
         <Head title="Customer Log in" />
 
+
+        <!-- Page Heading -->
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $page.url }}
+        </div>
+
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
