@@ -45,7 +45,7 @@ import ResponsiveNavLink from "@/Customer/Components/ResponsiveNavLink.vue";
                                         </ResponsiveNavLink>
                                     </template>
                                     <div v-else>
-                                        <ResponsiveNavLink :href="route('auth.login')" method="post" as="button">
+                                        <ResponsiveNavLink :href="route('auth.login')">
                                             Log In
                                         </ResponsiveNavLink>
                                     </div>
