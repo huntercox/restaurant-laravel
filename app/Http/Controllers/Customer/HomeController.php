@@ -11,9 +11,12 @@ class HomeController extends Controller
 {
     public function __invoke(): Response
     {
+
+        $hero_image = asset('images/pizza-restaurant.jpg');
+
         return Inertia::render('Home', [
             'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
+            'canRegister' => Route::has('register')
         ]);
     }
 }
