@@ -19,8 +19,16 @@ use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->as('admin.')->group(function () {
+
+
+
     Route::middleware('guest')->group(function () {
         Route::as('auth.')->group(function () {
+            Route::get('/register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+            Route::post('/register', [RegisteredUserController::class, 'store']);
+
             Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
@@ -42,10 +50,6 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::as('auth.')->group(function () {
-            Route::get('/register', [RegisteredUserController::class, 'create'])
-                ->name('register');
-
-            Route::post('/register', [RegisteredUserController::class, 'store']);
 
             Route::get('/verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
