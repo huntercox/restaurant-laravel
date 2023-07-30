@@ -34,9 +34,6 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 
-            Route::get('/dashboard', DashboardController::class)
-                ->name('dashboard');
-
             Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
 
@@ -76,6 +73,11 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
             Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+
+
+            Route::get('/dashboard', DashboardController::class)
+                ->name('dashboard');
         });
 
 
