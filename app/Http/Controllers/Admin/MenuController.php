@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Support\Inertia;
 use App\Http\Requests\Admin\MenuStoreRequest;
+use App\Models\Menu;
 
 class MenuController extends Controller
 {
@@ -31,6 +32,8 @@ class MenuController extends Controller
     public function store(MenuStoreRequest $request)
     {
         $validated = $request->validated();
+
+        Menu::create($validated);
 
         return redirect(route('admin.menus.index'));
     }
