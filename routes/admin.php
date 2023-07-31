@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
+use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -88,8 +89,12 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('/menus', MenuController::class)
             ->except(['show']);
 
+        Route::resource('/items', ItemController::class, [
+            'names' => 'items',
+        ]);
 
-        Route::resource('/menus.menu-items', MenuItemController::class, [
+
+        Route::resource('/menu-items', MenuItemController::class, [
             'names' => 'menu_items',
         ])->except(['show']);
 

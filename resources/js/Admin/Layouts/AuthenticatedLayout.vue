@@ -27,6 +27,9 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <NavLink :href="route('admin.menus.index')">Menus</NavLink>
+                            <NavLink :href="route('admin.items.index')">Items</NavLink>
+
+
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('admin.auth.dashboard')" :active="route().current('dashboard')">
