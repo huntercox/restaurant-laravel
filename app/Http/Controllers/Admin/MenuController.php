@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Support\Inertia;
+use App\Http\Requests\Admin\MenuStoreRequest;
 
 class MenuController extends Controller
 {
@@ -27,9 +28,11 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        return redirect(route('admin.menus.index'));
     }
 
     /**

@@ -88,6 +88,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('/menus', MenuController::class)
             ->except(['show']);
 
+
         Route::resource('/menus.menu-items', MenuItemController::class, [
             'names' => 'menu_items',
         ])->except(['show']);
