@@ -92,8 +92,8 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             'names' => 'menu_items',
         ])->except(['show']);
 
-        // Route::resource('/profile', ProfileController::class)
-        //     ->only(['edit', 'update', 'destroy']);
+        Route::resource('/profile', ProfileController::class)
+            ->only(['edit', 'update', 'destroy']);
 
         Route::get('/profile', [ProfileController::class, 'edit'])
             ->name('profile.edit');

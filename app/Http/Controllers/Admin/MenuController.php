@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Support\Inertia;
 
 class MenuController extends Controller
 {
@@ -12,7 +13,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Menu/Index');
     }
 
     /**
@@ -20,7 +21,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Menu/Create');
     }
 
     /**
