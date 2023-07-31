@@ -21,20 +21,20 @@ const form = useForm({
 
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('admin.items.store'), { onSuccess: () => form.reset() })">
-                <label for="description">
+                <label for="name">
                     Name
-                    <input v-model="form.description" placeholder="Name" type="text" description="description"
+                    <input v-model="form.name" placeholder="Name" type="text" name="name"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
-                    <InputError :message="form.errors.description" class="mt-2" />
+                    <InputError :message="form.errors.name" class="mt-2" />
                 </label>
                 <label for="description">
-                    Name
+                    Description
                     <input v-model="form.description" placeholder="Description" type="text" description="description"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.description" class="mt-2" />
                 </label>
                 <label for="price">
-                    Name
+                    Price
                     <input v-model="form.price" placeholder="Price" type="text" price="price"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.price" class="mt-2" />

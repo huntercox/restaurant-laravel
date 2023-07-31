@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ItemStoreRequest;
 use App\Support\Inertia;
 use App\Models\Item;
 
@@ -30,9 +31,13 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        Item::create($validated);
+
+        return redirect(route('admin.items.index'));
     }
 
     /**
