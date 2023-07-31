@@ -12,5 +12,7 @@ import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
         <h1 class="text-xl mb-3">Menus</h1>
 
         <Link :href="route('admin.menus.create')">Create Menu</Link>
+
+
     </AuthenticatedLayout>
 </template>
