@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ItemStoreRequest;
 use App\Support\Inertia;
-use App\Http\Requests\Admin\MenuStoreRequest;
-use App\Models\Menu;
+use App\Models\Item;
 
-class MenuController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Admin/Menu/Index', [
-            'menus' => Menu::latest()->get()
+        return Inertia::render('Admin/Item/Index', [
+            'items' => Item::latest()->get()
         ]);
     }
 
@@ -25,25 +25,25 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Menu/Create');
+        return Inertia::render('Admin/Item/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MenuStoreRequest $request)
+    public function store(ItemStoreRequest $request)
     {
         $validated = $request->validated();
 
-        Menu::create($validated);
+        Item::create($validated);
 
-        return redirect(route('admin.menus.index'));
+        return redirect(route('admin.items.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Item $item)
     {
         //
     }
@@ -51,7 +51,7 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Item $item)
     {
         //
     }
@@ -59,7 +59,7 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Item $item)
     {
         //
     }
@@ -67,7 +67,7 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Item $item)
     {
         //
     }

@@ -1,12 +1,12 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import GuestLayout from '@/Admin/Layouts/GuestLayout.vue';
+import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
 </script>
 
 <template>
     <Head title="Admin Dashboard" />
 
-    <GuestLayout>
+    <AuthenticatedLayout>
         <h1 class="text-xl mb-3">Admin Dashboard</h1>
-    </GuestLayout>
+    </AuthenticatedLayout>
 </template>

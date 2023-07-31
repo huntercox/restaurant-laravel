@@ -14,17 +14,26 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
+use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->as('admin.')->group(function () {
+
+
     Route::middleware('guest')->group(function () {
         Route::as('auth.')->group(function () {
+            Route::get('/register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+            Route::post('/register', [RegisteredUserController::class, 'store']);
+
             Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
             Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
 
             Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -42,10 +51,6 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::as('auth.')->group(function () {
-            Route::get('/register', [RegisteredUserController::class, 'create'])
-                ->name('register');
-
-            Route::post('/register', [RegisteredUserController::class, 'store']);
 
             Route::get('/verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
@@ -69,24 +74,37 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
             Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+
+
+            Route::get('/dashboard', DashboardController::class)
+                ->name('dashboard');
         });
+
 
         Route::resource('/customers', CustomerController::class)
             ->except(['create', 'store', 'show']);
-
-        Route::get('/dashboard', DashboardController::class)
-            ->name('dashboard');
 
 
         Route::resource('/menus', MenuController::class)
             ->except(['show']);
 
-        Route::resource('/menus.menu-items', MenuItemController::class, [
+        Route::resource('/items', ItemController::class, [
+            'names' => 'items',
+        ]);
+
+
+        Route::resource('/menu-items', MenuItemController::class, [
             'names' => 'menu_items',
         ])->except(['show']);
 
         Route::resource('/profile', ProfileController::class)
             ->only(['edit', 'update', 'destroy']);
+
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
+        Route::post('/profile', [ProfileController::class, 'update']);
+        Route::delete('/profile', [ProfileController::class, 'destroy']);
 
         Route::resource('/orders', OrderController::class)
             ->except(['create', 'store']);

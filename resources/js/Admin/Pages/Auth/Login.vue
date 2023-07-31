@@ -34,6 +34,11 @@ const submit = () => {
 
         <Head title="Admin Log in" />
 
+
+        <div class="mx-auto w-full my-6">
+            <h1 class="text-red-600 text-4xl font-black p-3 pl-0">Admin Login</h1>
+        </div>
+
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
