@@ -5,9 +5,13 @@ import PrimaryButton from '@/Admin/Components/PrimaryButton.vue';
 
 defineProps({
     message: String,
+    items: Array,
 });
+const selectedItemIds = null;
+
 const form = useForm({
     'name': '',
+    'item_ids': [],
 });
 </script>
 
@@ -24,6 +28,14 @@ const form = useForm({
                     <input v-model="form.name" placeholder="Name" type="text" name="name"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.name" class="mt-2" />
+
+                    <fieldset>
+                        <legend>Select items</legend>
+                        <div v-for="item in items" :key="item.id">
+                            <input type="checkbox" :id="item.id" :value="item.id" v-model="form.item_ids">
+                            <label :for="item.id" class="pl-1">{{ item.name }}</label>
+                        </div>
+                    </fieldset>
                 </label>
 
                 <PrimaryButton class="block mt-10 bg-red-500 text-xl">Add Menu</PrimaryButton>

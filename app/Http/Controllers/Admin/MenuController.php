@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Support\Inertia;
 use App\Http\Requests\Admin\MenuStoreRequest;
 use App\Models\Menu;
+use App\Models\Item;
 
 class MenuController extends Controller
 {
@@ -25,7 +26,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Menu/Create');
+        return Inertia::render('Admin/Menu/Create', [
+            'items' => Item::latest()->get()
+        ]);
     }
 
     /**
@@ -35,7 +38,15 @@ class MenuController extends Controller
     {
         $validated = $request->validated();
 
-        Menu::create($validated);
+        $menu = Menu::create($validated);
+
+        // Fetch the items
+        $items = Item::find($request->input('item_ids'));
+
+        // Attach items to the menu
+        foreach ($items as $item) {
+            $menu->items()->attach($item->id);
+        }
 
         return redirect(route('admin.menus.index'));
     }
