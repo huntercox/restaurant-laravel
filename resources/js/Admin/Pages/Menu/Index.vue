@@ -16,6 +16,12 @@ defineProps(['menus']);
         <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
             <div v-for="menu in menus" :key="menu.id" :menu="menu">
                 Menu Name: {{ menu.name }}
+
+                <div v-for="item in menu.items">
+                    <p>{{ item.name }}</p>
+                    <p>{{ item.description }}</p>
+                    <p>{{ item.price }}</p>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>

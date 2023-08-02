@@ -16,8 +16,11 @@ class MenuController extends Controller
      */
     public function index()
     {
+
+        $menus = Menu::with('items')->get();
+
         return Inertia::render('Admin/Menu/Index', [
-            'menus' => Menu::latest()->get()
+            'menus' => $menus,
         ]);
     }
 
