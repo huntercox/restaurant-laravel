@@ -13,10 +13,12 @@ defineProps(['items']);
             <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 flex justify-between items-center">
 
                 <h1 class="text-xl font-black">Items</h1>
+
+                <Link class="rounded-md bg-red-700 p-2 px-4 text-white font-black" :href="route('admin.items.create')">
+                Create Item</Link>
             </div>
         </div>
 
-        <Link :href="route('admin.items.create')">Create Item</Link>
 
         <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
             <div v-for="item in items" :key="item.id" :item="item">
