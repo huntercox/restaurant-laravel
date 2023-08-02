@@ -28,7 +28,6 @@ class MenuItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

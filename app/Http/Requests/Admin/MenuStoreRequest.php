@@ -23,6 +23,7 @@ class MenuStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:40'],
+            'item_ids' => ['array']
         ];
     }
 
@@ -38,6 +39,7 @@ class MenuStoreRequest extends FormRequest
             'name.required' => 'The field "name" is required.',
             'name.string' => 'The name must be a string.',
             'name.max' => 'The name must not be longer than 40 characters.',
+            'item_ids.array' => 'The field "stageName" is invalid.',
         ];
     }
 }

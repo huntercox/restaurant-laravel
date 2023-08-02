@@ -38,7 +38,15 @@ class MenuController extends Controller
     {
         $validated = $request->validated();
 
-        Menu::create($validated);
+        $menu = Menu::create($validated);
+
+        // Fetch the items
+        $items = Item::find($request->input('item_ids'));
+
+        // Attach items to the menu
+        foreach ($items as $item) {
+            $menu->items()->attach($item->id);
+        }
 
         return redirect(route('admin.menus.index'));
     }

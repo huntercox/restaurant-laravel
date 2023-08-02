@@ -7,10 +7,11 @@ defineProps({
     message: String,
     items: Array,
 });
-const selectedItem = null;
+const selectedItemIds = null;
 
 const form = useForm({
     'name': '',
+    'item_ids': [],
 });
 </script>
 
@@ -31,7 +32,7 @@ const form = useForm({
                     <fieldset>
                         <legend>Select items</legend>
                         <div v-for="item in items" :key="item.id">
-                            <input type="checkbox" :id="item.id" :value="item" v-model="selectedItems">
+                            <input type="checkbox" :id="item.id" :value="item.id" v-model="form.item_ids">
                             <label :for="item.id" class="pl-1">{{ item.name }}</label>
                         </div>
                     </fieldset>
