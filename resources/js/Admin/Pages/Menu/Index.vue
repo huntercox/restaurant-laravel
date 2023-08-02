@@ -9,18 +9,27 @@ defineProps(['menus']);
     <Head title="Admin - Menus" />
 
     <AuthenticatedLayout>
-        <h1 class="text-xl mb-3">Menus</h1>
 
-        <Link :href="route('admin.menus.create')">Create Menu</Link>
+        <div class="bg-red-100 py-4 mb-3">
+            <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 flex justify-between items-center">
+
+                <h1 class="text-xl font-black">Menus</h1>
+
+                <Link class="rounded-md bg-red-600 p-2" :href="route('admin.menus.create')">Create Menu</Link>
+            </div>
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
-            <div v-for="menu in menus" :key="menu.id" :menu="menu">
-                Menu Name: {{ menu.name }}
 
-                <div v-for="item in menu.items">
-                    <p>{{ item.name }}</p>
-                    <p>{{ item.description }}</p>
-                    <p>{{ item.price }}</p>
+            <div class="flex gap-40 justify-center">
+                <div class="w-full bg-red-100 p-3" v-for=" menu in menus" :key="menu.id" :menu="menu">
+                    <p class="font-black border-b-4 border-b-red-900">{{ menu.name }}</p>
+
+                    <div v-for="item in menu.items">
+                        <p>{{ item.name }}</p>
+                        <p>{{ item.description }}</p>
+                        <p>{{ item.price }}</p>
+                    </div>
                 </div>
             </div>
         </div>
