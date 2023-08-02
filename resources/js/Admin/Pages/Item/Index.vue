@@ -9,7 +9,12 @@ defineProps(['items']);
     <Head title="Admin - Items" />
 
     <AuthenticatedLayout>
-        <h1 class="text-xl mb-3">Items</h1>
+        <div class="bg-red-100 py-4 mb-3">
+            <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 flex justify-between items-center">
+
+                <h1 class="text-xl font-black">Items</h1>
+            </div>
+        </div>
 
         <Link :href="route('admin.items.create')">Create Item</Link>
 

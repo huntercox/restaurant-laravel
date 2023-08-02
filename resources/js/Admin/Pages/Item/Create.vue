@@ -17,7 +17,12 @@ const form = useForm({
     <Head title="Admin - Create new item" />
 
     <AuthenticatedLayout>
-        <h1 class="text-xl mb-3">Create New Item</h1>
+        <div class="bg-red-100 py-4 mb-3">
+            <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 flex justify-between items-center">
+
+                <h1 class="text-xl font-black">Create New Item</h1>
+            </div>
+        </div>
 
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('admin.items.store'), { onSuccess: () => form.reset() })">
