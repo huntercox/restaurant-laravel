@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Support\Inertia;
 use App\Http\Requests\Admin\MenuStoreRequest;
 use App\Models\Menu;
+use App\Models\Item;
 
 class MenuController extends Controller
 {
@@ -25,7 +26,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Menu/Create');
+        return Inertia::render('Admin/Menu/Create', [
+            'items' => Item::latest()->get()
+        ]);
     }
 
     /**

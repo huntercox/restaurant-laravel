@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Menu extends Model
 {
@@ -14,8 +14,8 @@ class Menu extends Model
         'name',
     ];
 
-    public function items(): HasMany
+    public function items(): BelongsToMany
     {
-        return $this->hasMany(MenuItem::class);
+        return $this->belongsToMany(Item::class, 'menu_items');
     }
 }
