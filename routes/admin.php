@@ -74,13 +74,14 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
             Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+        });
 
 
+        Route::group(['middleware' => ['role:admin']], function () {
 
             Route::get('/dashboard', DashboardController::class)
                 ->name('dashboard');
         });
-
 
         Route::resource('/customers', CustomerController::class)
             ->except(['create', 'store', 'show']);
@@ -103,7 +104,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
         Route::get('/profile', [ProfileController::class, 'edit'])
             ->name('profile.edit');
+
         Route::post('/profile', [ProfileController::class, 'update']);
+
         Route::delete('/profile', [ProfileController::class, 'destroy']);
 
         Route::resource('/orders', OrderController::class)

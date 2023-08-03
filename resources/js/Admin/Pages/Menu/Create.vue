@@ -29,7 +29,7 @@ const form = useForm({
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <form @submit.prevent="form.post(route('admin.menus.store'), { onSuccess: () => form.reset() })">
                 <label for="name">
-                    Name
+                    Menu Name
                     <input v-model="form.name" placeholder="Name" type="text" name="name"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.name" class="mt-2" />

@@ -19,7 +19,7 @@ class LoginRequest extends FormRequest
     {
         return User::where('email', $this->email)
             ->whereHas('roles', function ($query) {
-                $query->whereIn('name', ['Admin', 'Super-Admin']);
+                $query->whereIn('name', ['admin', 'Super-Admin']);
             })
             ->exists();
     }
