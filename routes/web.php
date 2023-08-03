@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
         ->name('menu');
 
     Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile');
+        ->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update']);
     Route::delete('/profile', [ProfileController::class, 'destroy']);
 
