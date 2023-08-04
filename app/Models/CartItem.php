@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MenuItem extends Model
+class CartItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'menu_id',
+        'cart_id',
         'item_id',
     ];
 
-    public function menu(): BelongsTo
+    public function cart(): BelongsTo
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Cart::class);
     }
 
     public function item(): HasOne
