@@ -47,12 +47,12 @@ const showingNavigationDropdown = ref(false);
                                         </span>
                                     </template>
 
-                                    <template #content>
+                                    <!-- <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                         <DropdownLink :href="route('auth.logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>
-                                    </template>
+                                    </template> -->
                                 </Dropdown>
                             </div>
                         </div>
