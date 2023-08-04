@@ -73,8 +73,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart', [CartController::class, 'update']);
     Route::delete('/cart', [CartController::class, 'destroy']);
 
-    Route::get('/menu', MenuController::class)
-        ->name('menu');
 
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
@@ -88,6 +86,8 @@ Route::middleware('auth')->group(function () {
         ->name('orders');
 });
 
+Route::get('/menu', MenuController::class)
+    ->name('menu');
 
 Route::get('/', HomeController::class)
     ->name('home');
