@@ -27,7 +27,7 @@ function removeFromCart(index) {
     this.updateCart();
 }
 function updateCart() {
-    this.$inertia.post('/cart', { items: this.cart });
+    this.$inertia.post('/cart', { item: this.cart });
 }
 </script>
 
@@ -52,7 +52,8 @@ function updateCart() {
                             <p class="text-right mt-4 font-bold text-sm">$ {{ item.price }}</p>
                             <!-- <button @click="addToCart(item)">Add to Cart</button> -->
                             <Link href="/cart" method="post" :data="item" as="button"
-                                class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold">Add
+                                class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
+                            Add
                             to Cart</Link>
                         </div>
                     </div>

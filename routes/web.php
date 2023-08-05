@@ -68,11 +68,6 @@ Route::middleware('auth')->group(function () {
             ->name('logout');
     });
 
-    Route::get('/cart', [CartController::class, 'edit'])
-        ->name('cart');
-    Route::post('/cart', [CartController::class, 'update']);
-    Route::delete('/cart', [CartController::class, 'destroy']);
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
@@ -85,6 +80,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', OrderController::class)
         ->name('orders');
 });
+
+
+Route::get('/cart', [CartController::class, 'edit'])
+    ->name('cart');
+Route::post('/cart', [CartController::class, 'update']);
+Route::delete('/cart', [CartController::class, 'destroy']);
+
 
 Route::get('/menu', MenuController::class)
     ->name('menu');

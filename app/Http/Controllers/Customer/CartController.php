@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -21,7 +23,16 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $item = $request->input('item');
+        $user = $request->user();
+
+        $user->cartItems()->create([
+            'item_id'  => $item['id'],
+            'quantity' => $item['quantity'],
+            'price'    => $item['price'],
+        ]);
+
+        return redirect()->back()->with('message', 'Cart updated successfully');
     }
 
     /**

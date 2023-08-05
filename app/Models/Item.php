@@ -20,4 +20,8 @@ class Item extends Model
     {
         return $this->belongsToMany(Menu::class, 'menu_items');
     }
+    public function carts(): BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class, 'cart_items');
+    }
 }
