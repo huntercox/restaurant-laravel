@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_guest',
     ];
 
     /**
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function scopeGuest($query)
+    {
+        return $query->where('is_guest', 1);
     }
 }

@@ -23,6 +23,7 @@ class RolePermissionSeeder extends Seeder
 
 
         // create roles and assign existing permissions
+        $role0 = Role::create(['name' => 'guest']);
         $role1 = Role::create(['name' => 'customer']);
 
         $role2 = Role::create(['name' => 'admin']);
@@ -36,19 +37,27 @@ class RolePermissionSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Example Customer User',
             'email' => 'test@example.com',
+            'is_guest' => false,
         ]);
         $user->assignRole($role1);
 
         $user = User::factory()->create([
             'name' => 'Example Admin User',
             'email' => 'admin@example.com',
+            'is_guest' => false,
         ]);
         $user->assignRole($role2);
 
         $user = User::factory()->create([
             'name' => 'Example Super-Admin User',
             'email' => 'superadmin@example.com',
+            'is_guest' => false,
         ]);
         $user->assignRole($role3);
+
+        $user = User::factory()->create([
+            'is_guest' => true
+        ]);
+        $user->assignRole($role0);
     }
 }

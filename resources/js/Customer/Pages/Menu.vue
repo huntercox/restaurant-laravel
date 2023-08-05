@@ -27,7 +27,7 @@ function removeFromCart(index) {
     this.updateCart();
 }
 function updateCart() {
-    this.$inertia.post('/cart', { item: this.cart });
+    this.$inertia.post('/cart', { items: this.cart });
 }
 </script>
 
