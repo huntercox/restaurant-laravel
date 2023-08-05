@@ -14,6 +14,8 @@ class CartItem extends Model
     protected $fillable = [
         'cart_id',
         'item_id',
+        'quantity',
+        'price',
     ];
 
     public function cart(): BelongsTo
