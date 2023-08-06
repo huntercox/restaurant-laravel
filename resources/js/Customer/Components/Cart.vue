@@ -1,10 +1,52 @@
 <script setup>
+import { ref } from 'vue';
+import { usePage, Link } from '@inertiajs/vue3'
 
+const page = usePage();
 
+const open = ref(false);
+
+defineProps({
+    items: {
+        type: Array,
+        default: () => [],
+    },
+});
+
+function toggleOpen() {
+    open.value = !open.value;
+    console.log('something');
+    console.log(open.value);
+}
+
+function clearCart() {
+    this.$inertia.delete('/cart');
+}
 </script>
 
 <template>
-    <div class="pl-3">
-        Cart 🛒
+    <div class="relative">
+        <button @click="toggleOpen" class="pl-3">
+            Cart 🛒
+        </button>
+        <div class="absolute z-50 top-11 right-0" v-if="open">
+            <div class="bg-white rounded border h-64 w-40">
+                <p class="font-bold uppercase text-center py-1 border-b-4 border-gray-900">Cart</p>
+                <div v-for="(item, index) in page.props.cartItems" :key="index">
+
+                    <div class="px-2 py-2 pb-1 flex justify-between items-center border-b-2 border-gray-400">
+                        <span class="text-sm font-bold uppercase">{{ item.item.name }}</span> <span class="">x{{
+                            item.quantity }}</span>
+                    </div>
+                </div>
+                <!-- <button @click="clearCart"
+                    class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
+                    Clear Cart
+                </button> -->
+                <Link href="/cart" method="delete" as="button"
+                    class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
+                Clear Cart</Link>
+            </div>
+        </div>
     </div>
 </template>
