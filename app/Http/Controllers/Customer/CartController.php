@@ -25,8 +25,8 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        $item = $request->input('items');
-        $user = Auth::user();
+        $item = $request->all();
+        $user = $request->user();
 
         if (!$user) {
             $guestUserId = Session::get('guest_user_id');
@@ -48,10 +48,16 @@ class CartController extends Controller
             }
         }
 
+        $cart = $user->cart()->create([
+            'user_id'  => $user->id,
+        ]);
+
         $user->cartItems()->create([
             'item_id'  => $item['id'],
-            'quantity' => $item['quantity'],
+            'quantity' => 1,
             'price'    => $item['price'],
+            'user_id'  => $user->id,
+            'cart_id'  => $cart->id,
         ]);
 
         return redirect()->back()->with('message', 'Cart updated successfully');
