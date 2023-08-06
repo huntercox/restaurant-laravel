@@ -32,20 +32,18 @@ function clearCart() {
         <div class="absolute z-50 top-11 right-0" v-if="open">
             <div class="bg-white rounded border h-64 w-40">
                 <p class="font-bold uppercase text-center py-1 border-b-4 border-gray-900">Cart</p>
-                <div v-for="(item, index) in page.props.cartItems" :key="index">
-
-                    <div class="px-2 py-2 pb-1 flex justify-between items-center border-b-2 border-gray-400">
-                        <span class="text-sm font-bold uppercase">{{ item.item.name }}</span> <span class="">x{{
-                            item.quantity }}</span>
+                <div class="flex flex-col h-full">
+                    <div v-for="(item, index) in page.props.cartItems" :key="index">
+                        <div class="px-2 py-2 pb-1 flex justify-between items-center border-b-2 border-gray-400">
+                            <span class="text-xs font-bold uppercase">{{ item.item.name }}</span> <span
+                                class="text-sm font-bold">x{{
+                                    item.quantity }}</span>
+                        </div>
                     </div>
+                    <Link href="/cart" method="delete" as="button"
+                        class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
+                    Clear Cart</Link>
                 </div>
-                <!-- <button @click="clearCart"
-                    class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
-                    Clear Cart
-                </button> -->
-                <Link href="/cart" method="delete" as="button"
-                    class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
-                Clear Cart</Link>
             </div>
         </div>
     </div>

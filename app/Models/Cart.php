@@ -25,4 +25,9 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+    public function scopeOld($query)
+    {
+        $twoMinutesAgo = now()->subHours(2);
+        return $query->where('updated_at', '<', $twoMinutesAgo);
+    }
 }
