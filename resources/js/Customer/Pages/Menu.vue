@@ -52,7 +52,8 @@ function updateCart() {
                                     <p class="font-black text-lg leading-4 mt-1">{{ item.name }}</p>
                                     <p class="text-xs">{{ item.description }}</p>
                                 </div>
-                                <p class="text-right font-bold text-xl pt-2 leading-3">$ {{ item.price }}</p>
+                                <p class="text-right font-bold text-xl pt-2 leading-3">$ {{ (item.price / 100).toFixed(2) }}
+                                </p>
                             </div>
                             <!-- <button @click="addToCart(item)">Add to Cart</button> -->
                             <div class="flex justify-end">

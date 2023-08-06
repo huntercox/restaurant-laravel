@@ -44,26 +44,26 @@ class MenuAndItemSeeder extends Seeder
         $pizza = Item::create([
             'name' => 'Pizza',
             'description' => "It's a full pizza!",
-            'price' => 16.99,
+            'price' => round(16.99 * 100),
         ]);
 
         $pasta = Item::create([
             'name' => 'Pasta',
             'description' => "Pizza, Pasta...",
-            'price' => 8.99,
+            'price' => round(8.99 * 100),
         ]);
 
         // Items for the Sides Menu
         $salad = Item::create([
             'name' => 'Salad',
             'description' => "I guess... if you want...",
-            'price' => 4.99,
+            'price' => round(4.99 * 100),
         ]);
 
         $french_fries = Item::create([
             'name' => 'French Fries',
             'description' => "But really?",
-            'price' => 2.99,
+            'price' => round(2.99 * 100),
         ]);
 
 

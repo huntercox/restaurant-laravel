@@ -77,7 +77,7 @@ class CartController extends Controller
             $user->cartItems()->create([
                 'item_id' => $item['id'],
                 'quantity' => 1,
-                'price' => $item['price'],
+                'price' => $item['price'] * 100,
                 'cart_id' => $cart->id,
             ]);
         }

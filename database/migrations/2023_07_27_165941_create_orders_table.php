@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('coupon_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->decimal('total_price', 8, 2);
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();
+            $table->integer('total_price');
             $table->timestamps();
         });
     }
