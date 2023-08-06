@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+
+use Spatie\Permission\Models\Role;
 
 class CartController extends Controller
 {
@@ -36,14 +42,18 @@ class CartController extends Controller
                 $user = User::find($guestUserId);
             } else {
                 // Otherwise, create a new guest user and store their ID in the session
+
                 $user = User::create([
                     // You might want to indicate that this user is a guest, for example:
-                    'name' => 'John Doe',
-                    'email' => 'johndoe@example.com',
-                    'password' => 'johndoe@example.com',
+                    'name' => Str::random(10),
+                    'email' => Str::random(10),
+                    'password' => Hash::make(Str::random(10)),
                     'is_guest' => true,
                     // Include any other necessary fields, or defaults for those fields
                 ]);
+
+                $role = Role::findByName('guest');
+                $user->assignRole($role);
                 Session::put('guest_user_id', $user->id);
             }
         }
@@ -78,8 +88,28 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
-        //
+        $user = $request->user();
+
+        // If there's no logged in user and no guest user, then there's no cart to clear
+        if (!$user) {
+            $guestUserId = Session::get('guest_user_id');
+            if (!$guestUserId) {
+                return redirect()->back();
+            }
+            $user = User::find($guestUserId);
+        }
+
+        // Get the user's cart
+        $cart = $user->cart;
+
+        // If the user has a cart, delete it and all associated cart items
+        if ($cart) {
+            $cart->cartItems()->delete();
+            $cart->delete();
+        }
+
+        return redirect()->back()->with('message', 'Cart cleared successfully');
     }
 }
