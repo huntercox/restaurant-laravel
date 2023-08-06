@@ -14,6 +14,7 @@ use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\MenuController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\Customer\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -86,6 +87,11 @@ Route::get('/cart', [CartController::class, 'edit'])
     ->name('cart');
 Route::post('/cart', [CartController::class, 'update']);
 Route::delete('/cart', [CartController::class, 'destroy']);
+
+
+
+Route::get('/checkout', CheckoutController::class)
+    ->name('checkout');
 
 
 Route::get('/menu', MenuController::class)

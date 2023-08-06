@@ -41,8 +41,12 @@ function clearCart() {
                         </div>
                     </div>
                     <Link href="/cart" method="delete" as="button"
-                        class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">
+                        class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400 leading-5 pt-2">
                     Clear Cart</Link>
+
+                    <Link href="/checkout"
+                        class="rounded-sm bg-yellow-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-yellow-400 leading-5 pt-2 text-center">
+                    Checkout</Link>
                 </div>
             </div>
         </div>
