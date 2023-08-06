@@ -15,8 +15,6 @@ defineProps({
 
 function toggleOpen() {
     open.value = !open.value;
-    console.log('something');
-    console.log(open.value);
 }
 
 function clearCart() {

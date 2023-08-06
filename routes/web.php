@@ -16,6 +16,7 @@ use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Customer\CheckoutController;
 use Illuminate\Support\Facades\Route;
+use App\Support\Inertia;
 
 Route::middleware('guest')->group(function () {
     Route::as('auth.')->group(function () {
@@ -90,8 +91,9 @@ Route::delete('/cart', [CartController::class, 'destroy']);
 
 
 
-Route::get('/checkout', CheckoutController::class)
-    ->name('checkout');
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+})->name('checkout');
 
 
 Route::get('/menu', MenuController::class)
