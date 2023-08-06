@@ -48,17 +48,29 @@ class CartController extends Controller
             }
         }
 
-        $cart = $user->cart()->create([
-            'user_id'  => $user->id,
-        ]);
+        // Check if a cart already exists for the user
+        $cart = $user->cart()->first();
+        if (!$cart) {
+            // Create a new cart if none exists
+            $cart = $user->cart()->create([
+                'user_id' => $user->id,
+            ]);
+        }
 
-        $user->cartItems()->create([
-            'item_id'  => $item['id'],
-            'quantity' => 1,
-            'price'    => $item['price'],
-            'user_id'  => $user->id,
-            'cart_id'  => $cart->id,
-        ]);
+        // Check if the item is already in the cart
+        $cartItem = $user->cartItems()->where('item_id', $item['id'])->first();
+        if ($cartItem) {
+            // If the item is already in the cart, increment the quantity
+            $cartItem->increment('quantity');
+        } else {
+            // Otherwise, create a new cart item
+            $user->cartItems()->create([
+                'item_id' => $item['id'],
+                'quantity' => 1,
+                'price' => $item['price'],
+                'cart_id' => $cart->id,
+            ]);
+        }
 
         return redirect()->back()->with('message', 'Cart updated successfully');
     }
