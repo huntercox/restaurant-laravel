@@ -35,7 +35,8 @@ function clearCart() {
                         <div class="px-2 py-2 pb-1 flex justify-between items-center border-b-2 border-gray-400">
                             <span class="text-xs font-bold uppercase">{{ item.item.name }}</span> <span
                                 class="text-sm font-bold">x{{
-                                    item.quantity }}</span>
+                                    item.quantity }}</span> <span class="text-sm font-bold">${{
+        (item.price / 100).toFixed(2) }}</span>
                         </div>
                     </div>
                     <Link href="/cart" method="delete" as="button"

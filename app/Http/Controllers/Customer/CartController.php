@@ -72,12 +72,13 @@ class CartController extends Controller
         if ($cartItem) {
             // If the item is already in the cart, increment the quantity
             $cartItem->increment('quantity');
+            $cartItem->update(['price' => $cartItem->item->price * $cartItem->quantity]);
         } else {
             // Otherwise, create a new cart item
             $user->cartItems()->create([
                 'item_id' => $item['id'],
                 'quantity' => 1,
-                'price' => $item['price'] * 100,
+                'price' => $item['price'],
                 'cart_id' => $cart->id,
             ]);
         }
