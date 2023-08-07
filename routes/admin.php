@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\CustomerController;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\ItemController;
@@ -86,6 +87,8 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('/customers', CustomerController::class)
             ->except(['create', 'store', 'show']);
 
+        Route::resource('/coupons', CouponController::class)
+            ->except(['store', 'show']);
 
         Route::resource('/menus', MenuController::class)
             ->except(['show']);

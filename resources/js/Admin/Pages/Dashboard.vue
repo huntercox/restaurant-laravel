@@ -28,6 +28,9 @@ import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
                 <Link class="rounded-md bg-red-700 p-2 px-4 text-white font-black" :href="route('admin.menus.create')">
                 Create Menu
                 </Link>
+                <Link class="rounded-md bg-red-700 p-2 px-4 text-white font-black" :href="route('admin.coupons.create')">
+                Create Coupon
+                </Link>
             </div>
 
         </div>
