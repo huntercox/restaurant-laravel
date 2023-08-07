@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_guest' => false
         ]);
 
         $role = Role::findByName('admin');
@@ -53,6 +54,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('admin.auth.dashboard'));
+        return redirect(route('admin.dashboard'));
     }
 }

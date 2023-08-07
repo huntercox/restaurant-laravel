@@ -30,7 +30,7 @@ import { Link } from '@inertiajs/vue3';
                             <!-- Utility Nav -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center bg-gray-200 self-start justify-end">
-                                <Link :href="route('admin.auth.dashboard')" :active="route().current('dashboard')"
+                                <Link :href="route('admin.dashboard')" :active="route().current('dashboard')"
                                     class="text-gray-900 font-bold px-2 hover:text-gray-700">
                                 Login
                                 </Link>
