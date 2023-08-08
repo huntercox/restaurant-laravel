@@ -44,6 +44,18 @@ const generateCode = () => {
     form.code = code;
 };
 
+const handleDiscountInput = (event) => {
+    let input = event.target.value;
+    // Remove all characters that are not numbers
+    input = input.replace(/[^0-9]/g, '');
+    // If there are more than two digits, keep only the first two
+    if (input.length > 2) {
+        input = input.slice(0, 2);
+    }
+    form.discount = input;
+};
+
+
 </script>
 
 <template>
@@ -75,7 +87,7 @@ const generateCode = () => {
                             class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
 
                         <button type="button" @click="generateCode"
-                            class="ml-2 px-4 py-2 bg-gray-200 rounded-md">Generate</button>
+                            class="ml-2 mb-3 px-4 py-2 bg-gray-200 rounded-md">Generate</button>
                     </div>
                     <span v-if="v$.code.$error" class="text-red-500 text-sm">Please enter a valid code.</span>
                 </label>
@@ -83,8 +95,9 @@ const generateCode = () => {
 
                 <label for="discount">
                     Discount Amount
-                    <input v-model="form.discount" placeholder="Discount (percentage)" type="number" name="discount"
-                        class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
+                    <input v-model="form.discount" @input="handleDiscountInput" placeholder="Discount" type="text"
+                        name="discount" class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
+
                     <InputError :message="form.errors.discount" class="mt-2" />
                 </label>
 
