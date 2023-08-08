@@ -1,7 +1,11 @@
 <script setup>
 import { useForm, Head } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required, alphaNum } from '@vuelidate/validators';
 import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Admin/Components/PrimaryButton.vue';
+import InputError from '@/Admin/Components/InputError.vue';
 
 defineProps({
     message: String,
@@ -14,6 +18,32 @@ const form = useForm({
     'discount': '',
     'expiry_date': '',
 });
+
+let v$ = useVuelidate({
+    code: { required, alphaNum }
+}, form)
+
+let code = computed({
+    get: () => form.code,
+    set: (newVal) => form.code = newVal.toUpperCase()
+});
+
+const onSubmit = async () => {
+    await v$.$validate();
+    if (!v$.$error) {
+        // form.post(...)
+    }
+};
+
+const generateCode = () => {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+        code += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    form.code = code;
+};
+
 </script>
 
 <template>
@@ -38,10 +68,18 @@ const form = useForm({
 
                 <label for="code">
                     Coupon Code
-                    <input v-model="form.code" placeholder="Code" type="text" name="code"
-                        class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
-                    <InputError :message="form.errors.code" class="mt-2" />
+                    <div class="flex items-center">
+                        <input v-model="form.code"
+                            @input="form.code = $event.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase()"
+                            placeholder="Code" type="text" name="code"
+                            class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
+
+                        <button type="button" @click="generateCode"
+                            class="ml-2 px-4 py-2 bg-gray-200 rounded-md">Generate</button>
+                    </div>
+                    <span v-if="v$.code.$error" class="text-red-500 text-sm">Please enter a valid code.</span>
                 </label>
+
 
                 <label for="discount">
                     Discount Amount
