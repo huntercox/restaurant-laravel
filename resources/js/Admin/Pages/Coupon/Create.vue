@@ -7,6 +7,7 @@ defineProps({
     message: String,
 });
 
+
 const form = useForm({
     'name': '',
     'code': '',
@@ -44,7 +45,7 @@ const form = useForm({
 
                 <label for="discount">
                     Discount Amount
-                    <input v-model="form.discount" placeholder="Discount" type="text" name="discount"
+                    <input v-model="form.discount" placeholder="Discount (percentage)" type="number" name="discount"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.discount" class="mt-2" />
                 </label>

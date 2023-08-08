@@ -31,7 +31,6 @@ class CouponController extends Controller
         return Inertia::render('Admin/Coupon/Create');
     }
 
-
     /**
      * Store a newly created resource in storage.
      */
