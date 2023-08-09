@@ -88,7 +88,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             ->except(['create', 'store', 'show']);
 
         Route::resource('/coupons', CouponController::class)
-            ->except(['store', 'show']);
+            ->except(['show']);
 
         Route::resource('/menus', MenuController::class)
             ->except(['show']);

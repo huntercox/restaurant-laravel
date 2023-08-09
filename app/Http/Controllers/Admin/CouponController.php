@@ -36,7 +36,7 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'name' => 'required|string|max:30',
             'code' => ['required', 'string', Rule::unique('coupons', 'code')],
             'discount' => ['required', 'numeric', 'between:0,999999.99', 'regex:/^\d+(\.\d{1,2})?$/'],

@@ -18,15 +18,6 @@ import { Link } from '@inertiajs/vue3';
                                 </Link>
                             </div>
 
-
-                            <!-- Main Navigation -->
-                            <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center self-center justify-start">
-                                <Link :href="route('admin.menu')" :active="route().current()"
-                                    class="text-white font-bold px-2 hover:text-gray-700">
-                                Menu
-                                </Link>
-                            </div> -->
-
                             <!-- Utility Nav -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center bg-gray-200 self-start justify-end">
