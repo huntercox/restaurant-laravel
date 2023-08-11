@@ -17,6 +17,7 @@ class Cart extends Model
         'user_id',
         'coupon_id',
         'sub_total',
+        'discount',
         'total',
     ];
 
@@ -55,6 +56,7 @@ class Cart extends Model
     // Update the sub_total and total_price fields
     $this->update([
       'sub_total' => $sub_total,
+      'discount' => $discount,
       'total' => $total,
     ]);
   }

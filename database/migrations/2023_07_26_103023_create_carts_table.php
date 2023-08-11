@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->nullable();
             $table->foreignId('coupon_id')->nullable()->constrained()->cascadeOnDelete();
             $table->integer('sub_total')->default(0);
+            $table->integer('discount')->default(0);
             $table->integer('total')->default(0);;
             $table->timestamps();
         });
