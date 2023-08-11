@@ -11,10 +11,13 @@ class CouponController extends Controller
     public function apply(Request $request)
     {
         $code = $request->input('code');
-        $coupon = Coupon::where('code', $code)->first();
+        $coupon = Coupon::where('code', $code)->firstOrFail();
+
 
         if ($coupon) {
             // Apply the discount to the cart
+
+          dd($coupon);
             $discount = $coupon->discount;
             // You can use a service or another approach to update the cart subtotal
             return redirect()->route('checkout')->with('discount', $discount);
@@ -22,4 +25,5 @@ class CouponController extends Controller
 
         return response()->json(['message' => 'Invalid coupon code'], 400);
     }
+
 }

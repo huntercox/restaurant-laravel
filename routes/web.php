@@ -105,3 +105,7 @@ Route::get('/menu', MenuController::class)
 
 Route::get('/', HomeController::class)
   ->name('home');
+
+Route::get('/phpinfo', function() {
+  return phpinfo();
+});
