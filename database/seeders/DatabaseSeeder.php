@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolePermissionSeeder::class,
+            MenuAndItemSeeder::class,
         ]);
 
         $user = User::create([
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->assignRole(Role::findByName('Super-Admin'));
+
     }
 }

@@ -20,21 +20,21 @@ class MenuAndItemSeeder extends Seeder
     public function run()
     {
         // Disable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        // Truncate your tables
-        DB::table('order_items')->truncate();
-        DB::table('cart_items')->truncate();
-        DB::table('items')->truncate();
-        DB::table('orders')->truncate();
-        DB::table('menu_items')->truncate();
-        DB::table('menus')->truncate();
-        DB::table('statuses')->truncate();
-        DB::table('coupons')->truncate();
-        DB::table('users')->truncate();
-
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//
+//        // Truncate your tables
+//        DB::table('order_items')->truncate();
+//        DB::table('cart_items')->truncate();
+//        DB::table('items')->truncate();
+//        DB::table('orders')->truncate();
+//        DB::table('menu_items')->truncate();
+//        DB::table('menus')->truncate();
+//        DB::table('statuses')->truncate();
+//        DB::table('coupons')->truncate();
+//        DB::table('users')->truncate();
+//
+//        // Re-enable foreign key checks
+//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Menus
         $italianMenu = Menu::create(['name' => 'Italian']);

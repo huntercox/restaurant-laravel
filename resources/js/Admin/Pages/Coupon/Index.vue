@@ -1,5 +1,5 @@
 <script setup>
-import { useForm, Head } from '@inertiajs/vue3';
+import { useForm, Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
 
 defineProps({
