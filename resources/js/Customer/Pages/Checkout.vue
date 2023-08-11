@@ -14,14 +14,11 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  cart: {
+    type: Array,
+    default: () => [],
+  }
 });
-
-const subtotal = computed(() => {
-  return page.props.cartItems.reduce((total, item) => {
-    return total + (item.price);
-  }, 0) / 100;
-});
-
 
 function validateCode(event) {
   couponCode.value = event.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
@@ -63,7 +60,7 @@ function onError() {
 
         <div class="border border-t-4 border-gray-500 flex justify-between p-2 bg-red-100 mt-5">
           <span class="text-lg">Subtotal:</span>
-          <span class="text-lg font-black">${{ subtotal.toFixed(2) }}</span>
+          <span class="text-lg font-black">${{ (page.props.cart[0].sub_total / 100).toFixed(2) }}</span>
         </div>
 
         <div class="mt-4">
