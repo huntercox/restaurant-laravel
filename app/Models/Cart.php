@@ -41,9 +41,6 @@ class Cart extends Model
     // Iterate through the cart items and sum the product of price and quantity
     $sub_total = $this->cartItems->sum(function (CartItem $cartItem) { return $cartItem->item->price * $cartItem->quantity; });
 
-
-    dd($sub_total);
-
     // If there's a coupon_id, you might want to apply a discount based on the coupon
     $discount = 0;
     if ($this->coupon_id) {

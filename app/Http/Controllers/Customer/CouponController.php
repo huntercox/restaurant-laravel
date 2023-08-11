@@ -11,17 +11,25 @@ class CouponController extends Controller
     public function apply(Request $request)
     {
         $code = $request->input('code');
-        $coupon = Coupon::where('code', $code)->firstOrFail();
+        $coupon = Coupon::where('code', $code)->first();
 
+      if ($coupon) {
+        // Find the user's cart
+        $user = $request->user();
+        $cart = $user->cart;
 
-        if ($coupon) {
-            // Apply the discount to the cart
-
-          dd($coupon);
-            $discount = $coupon->discount;
-            // You can use a service or another approach to update the cart subtotal
-            return redirect()->route('checkout')->with('discount', $discount);
+        if (!$cart) {
+          return response()->json(['message' => 'No cart found'], 400);
         }
+
+        // Apply the coupon to the cart
+        $cart->update(['coupon_id' => $coupon->id]);
+
+        // Calculate the new sub_total and total_price
+        $cart->calculate();
+
+        return redirect()->route('checkout')->with('message', 'Coupon applied successfully');
+      }
 
         return response()->json(['message' => 'Invalid coupon code'], 400);
     }
