@@ -110,11 +110,20 @@ class CartController extends Controller
         // Get the user's cart
         $cart = $user->cart;
 
-        // If the user has a cart, delete it and all associated cart items
-        if ($cart) {
-            $cart->cartItems()->delete();
-            $cart->delete();
-        }
+      // If the user has a cart, clear the cart items and reset the relevant fields
+      if ($cart) {
+        // Delete all associated cart items
+        $cart->cartItems()->delete();
+
+        // Reset coupon_id and discount
+        $cart->update([
+          'coupon_id' => null,
+          'discount' => 0,
+        ]);
+
+        // Recalculate sub_total, discount, and total using the existing calculate method
+        $cart->calculate();
+      }
 
         return redirect()->back()->with('message', 'Cart cleared successfully');
     }
