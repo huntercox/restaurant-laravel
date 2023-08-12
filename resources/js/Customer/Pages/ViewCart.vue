@@ -35,7 +35,6 @@ const validations = useVuelidate({
 function onSuccess(response) {
   // Handle success (e.g., update cart subtotal or show success message)
   couponError.value = '';
-  alert('Coupon was applied.')
 }
 
 function onError() {
@@ -61,7 +60,7 @@ function onError() {
 
         <div
           class="border border-t-4 border-gray-500 flex justify-between p-2 mt-5"
-          :class="page.props.cart[0]?.coupon_id === 1 ? 'bg-blue-200' : 'bg-orange-300'"
+          :class="page.props.cart[0]?.coupon_id === 1 ? 'bg-blue-200' : 'bg-red-200'"
         >
           <span class="text-lg">Subtotal:</span>
           <template v-if="page.props.cart[0]?.sub_total">
@@ -69,11 +68,6 @@ function onError() {
             <span class="text-lg font-black">${{ (page.props.cart[0]?.sub_total / 100).toFixed(2) }}</span>
 
           </template>
-        </div>
-
-        <div class="border border-t-4 border-gray-500 flex justify-between p-2 mt-5 bg-red-100">
-          <span class="text-lg font-black uppercase">Total:</span>
-          <span class="text-lg font-black">${{ (page.props.cart[0]?.total / 100).toFixed(2) }}</span>
         </div>
 
         <div class="mt-4">

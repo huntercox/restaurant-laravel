@@ -40,11 +40,11 @@ defineProps({
         <div v-if="page.props.cart[0]?.coupon_id === 1" class="flex flex-col h-full">
           <div class="px-2 py-2 pb-1 flex justify-between items-center border-b-2 border-gray-400">
             <span class="text-xs font-bold uppercase text-gray-600">Coupon: {{ page.props.cart[0]?.code }} </span><span> </span><span class="text-sm font-bold text-red-900"> - ${{ (page.props.cart[0].discount / 100).toFixed(2) }}</span>
-        </div>
+          </div>
         </div>
 
 
-        <div class="border border-t-4 border-gray-500 flex justify-between p-2 mt-5 bg-red-100">
+        <div class="border border-t-4 border-gray-500 flex justify-between p-2 mt-5 bg-red-400">
           <span class="text-lg font-black uppercase">Total:</span>
           <span class="text-lg font-black">${{ (page.props.cart[0]?.total / 100).toFixed(2) }}</span>
         </div>
