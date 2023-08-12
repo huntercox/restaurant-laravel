@@ -47,7 +47,7 @@ function onError() {
 <Head title="View Cart page" />
 <template>
   <GuestLayout>
-    <h1 class="text-xl mb-3">View Cart</h1>
+    <h1 class="text-2xl mb-3 mt-2 font-black ">View Cart</h1>
 
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col h-full">
@@ -90,6 +90,11 @@ function onError() {
             <span v-if="couponError" class="text-red-500 text-sm">{{ couponError }}</span>
           </label>
         </div>
+
+        <Link href="/checkout" method="get" :data="{ cart }"
+              class="ml-2 mb-3 px-4 py-2 bg-red-500 hover:bg-red-400 rounded-md text-lg text-white font-black text-right mt-20">
+          Checkout
+        </Link>
       </div>
     </div>
   </GuestLayout>

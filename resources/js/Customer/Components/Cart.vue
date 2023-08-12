@@ -24,8 +24,8 @@ function clearCart() {
 
 <template>
     <div class="relative">
-        <button @click="toggleOpen" class="pl-3">
-            Cart 🛒
+        <button @click="toggleOpen" class="px-2 pt-1 rounded-md bg-gray-100 hover:bg-gray-200 text-black font-black uppercase">
+          Cart
         </button>
         <div class="absolute z-50 top-11 right-0" v-if="open">
             <div class="bg-white rounded border h-64 w-40">
@@ -43,7 +43,7 @@ function clearCart() {
                         class="rounded-sm bg-red-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400 leading-5 pt-2">
                     Clear Cart</Link>
 
-                    <Link href="/checkout"
+                    <Link href="/view-cart"
                         class="rounded-sm bg-yellow-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-yellow-400 leading-5 pt-2 text-center">
                     View Cart</Link>
                 </div>

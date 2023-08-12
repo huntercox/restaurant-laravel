@@ -99,13 +99,21 @@ Route::get('/view-cart', function () {
   return Inertia::render('ViewCart');
 });
 
+Route::get('/checkout', function () {
+  return Inertia::render('Checkout');
+});
 
+
+// Menu page
 Route::get('/menu', MenuController::class)
   ->name('menu');
 
+// Home page
 Route::get('/', HomeController::class)
   ->name('home');
 
+
+// PHP INFO
 Route::get('/phpinfo', function() {
   return phpinfo();
 });
