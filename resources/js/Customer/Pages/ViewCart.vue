@@ -44,10 +44,10 @@ function onError() {
 
 </script>
 
-<Head title="Checkout page" />
+<Head title="View Cart page" />
 <template>
   <GuestLayout>
-    <h1 class="text-xl mb-3">Checkout page</h1>
+    <h1 class="text-xl mb-3">View Cart</h1>
 
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col h-full">

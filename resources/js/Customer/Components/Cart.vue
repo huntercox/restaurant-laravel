@@ -45,7 +45,7 @@ function clearCart() {
 
                     <Link href="/checkout"
                         class="rounded-sm bg-yellow-300 p-1 px-2 my-1 text-sm uppercase font-semibold hover:bg-yellow-400 leading-5 pt-2 text-center">
-                    Checkout</Link>
+                    View Cart</Link>
                 </div>
             </div>
         </div>

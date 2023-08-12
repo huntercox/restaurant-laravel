@@ -95,9 +95,9 @@ Route::delete('/cart', [CartController::class, 'destroy']);
 Route::post('/apply-coupon', [CouponController::class, 'apply']);
 
 
-Route::get('/checkout', function () {
-  return Inertia::render('Checkout');
-})->name('checkout');
+Route::get('/view-cart', function () {
+  return Inertia::render('ViewCart');
+});
 
 
 Route::get('/menu', MenuController::class)
