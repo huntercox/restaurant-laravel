@@ -17,8 +17,8 @@ import ResponsiveNavLink from "@/Customer/Components/ResponsiveNavLink.vue";
               <div class="flex justify-start">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-between">
-                  <Link href="/">
-                  <ApplicationLogo class="block w-auto fill-current text-gray-800 hover:scale-125 transition-transform" />
+                  <Link href="/" title="Restaurant Laravel">
+                  <ApplicationLogo class="block w-auto fill-current text-gray-800 hover:scale-105 transition-transform" />
                   </Link>
                 </div>
 
