@@ -2,6 +2,7 @@
 import { useForm, Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Admin/Components/PrimaryButton.vue';
+import InputError from "@/Customer/Components/InputError.vue";
 
 defineProps({
     message: String,
@@ -14,7 +15,7 @@ const form = useForm({
 </script>
 
 <template>
-    <Head title="Admin - Create new item" />
+    <Head><title>Admin: Create New Item</title></Head>
 
     <AuthenticatedLayout>
         <div class="bg-red-100 py-4 mb-3">
@@ -34,13 +35,13 @@ const form = useForm({
                 </label>
                 <label for="description">
                     Description
-                    <input v-model="form.description" placeholder="Description" type="text" description="description"
+                    <input v-model="form.description" placeholder="Description" type="text" name="description"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.description" class="mt-2" />
                 </label>
                 <label for="price">
                     Price
-                    <input v-model="form.price" placeholder="Price" type="text" price="price"
+                    <input v-model="form.price" placeholder="Price" type="text" name="price"
                         class="block w-full border-gray-300 rounded-md shadow-sm mb-3" />
                     <InputError :message="form.errors.price" class="mt-2" />
                 </label>
