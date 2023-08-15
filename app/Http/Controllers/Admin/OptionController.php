@@ -15,7 +15,7 @@ class OptionController extends Controller
      */
     public function index()
     {
-      $options = Option::with('optionCategory')->get();
+      $options = Option::latest()->get();
       return Inertia::render('Admin/Option/Index', [
         'options' => $options,
       ]);
@@ -40,7 +40,7 @@ class OptionController extends Controller
 
       $option = Option::create($validated);
 
-      return redirect(route('admin.options.create'));
+      return redirect(route('admin.options.index'));
     }
 
     /**

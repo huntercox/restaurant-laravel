@@ -26,7 +26,7 @@ defineProps(['options']);
         <template v-if="options === null">
           <p>Sorry, but no options are available at this time.</p>
         </template>
-        <template v-if="options !== null && options.length === 0">
+        <template v-if="options.length !== 0">
           <div class="w-full bg-gray-200" v-for="option in options" :key="option.id" :option="option">
             <div class="bg-gray-600 text-white uppercase p-3">
               <p class="font-black">{{ option.name }}</p>
