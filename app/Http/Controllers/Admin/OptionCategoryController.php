@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Option;
+use App\Http\Controllers\Controller;
+use App\Models\OptionCategory;
 use Illuminate\Http\Request;
 
-class OptionController extends Controller
+class OptionCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class OptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Option $option)
+    public function show(OptionCategory $optionCategory)
     {
         //
     }
@@ -42,7 +43,7 @@ class OptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Option $option)
+    public function edit(OptionCategory $optionCategory)
     {
         //
     }
@@ -50,7 +51,7 @@ class OptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Option $option)
+    public function update(Request $request, OptionCategory $optionCategory)
     {
         //
     }
@@ -58,7 +59,7 @@ class OptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Option $option)
+    public function destroy(OptionCategory $optionCategory)
     {
         //
     }

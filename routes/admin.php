@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +98,8 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             'names' => 'items',
         ]);
 
+      Route::resource('/options', OptionController::class)
+          ->except(['show']);
 
         Route::resource('/menu-items', MenuItemController::class, [
             'names' => 'menu_items',

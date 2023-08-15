@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Optionables;
+use App\Http\Controllers\Controller;
+use App\Models\Option;
+use App\Support\Inertia;
 use Illuminate\Http\Request;
 
-class OptionablesController extends Controller
+class OptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+      $options = Option::with('optionCategory')->get();
+      return Inertia::render('Admin/Option/Index', [
+        'options' => $options,
+      ]);
     }
 
     /**
@@ -20,7 +25,7 @@ class OptionablesController extends Controller
      */
     public function create()
     {
-        //
+      return Inertia::render('Admin/Option/Create');
     }
 
     /**
@@ -28,13 +33,17 @@ class OptionablesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validated();
+
+      $option = Option::create($validated);
+
+      return redirect(route('admin.options.create'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Optionables $optionables)
+    public function show(Option $option)
     {
         //
     }
@@ -42,7 +51,7 @@ class OptionablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Optionables $optionables)
+    public function edit(Option $option)
     {
         //
     }
@@ -50,7 +59,7 @@ class OptionablesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Optionables $optionables)
+    public function update(Request $request, Option $option)
     {
         //
     }
@@ -58,7 +67,7 @@ class OptionablesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Optionables $optionables)
+    public function destroy(Option $option)
     {
         //
     }

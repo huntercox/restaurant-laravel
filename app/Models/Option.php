@@ -16,4 +16,10 @@ class Option extends Model
       'item_id',
       'category_id',
     ];
+
+
+    public function optionCategory()
+    {
+      return $this->belongsTo(OptionCategory::class);
+    }
 }

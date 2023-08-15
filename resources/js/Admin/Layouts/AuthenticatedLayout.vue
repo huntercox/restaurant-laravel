@@ -27,6 +27,7 @@ const showingNavigationDropdown = ref(false);
 
               <NavLink :href="route('admin.menus.index')">Menus</NavLink>
               <NavLink :href="route('admin.items.index')">Items</NavLink>
+              <NavLink :href="route('admin.options.index')">Options</NavLink>
               <NavLink :href="route('admin.coupons.index')">Coupons</NavLink>
 
 
