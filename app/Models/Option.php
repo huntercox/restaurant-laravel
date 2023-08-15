@@ -13,8 +13,6 @@ class Option extends Model
       'name',
       'description',
       'price',
-      'item_id',
-      'category_id',
     ];
 
     public function optionCategory()

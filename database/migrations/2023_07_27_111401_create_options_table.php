@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('option_category_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('item_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('option_category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('price');
             $table->timestamps();
         });
