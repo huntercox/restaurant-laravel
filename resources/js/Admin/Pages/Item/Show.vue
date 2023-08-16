@@ -14,7 +14,7 @@ defineProps(['item']);
 
         <h1 class="text-xl font-black">Item - {{item.name}}</h1>
 
-        <Link class="rounded-md bg-red-700 p-2 px-4 text-white font-black" :href="route('admin.items.edit')">
+        <Link class="rounded-md bg-red-700 p-2 px-4 text-white font-black" :href="`/admin/items/${item.id}/edit`">
           Edit Item</Link>
       </div>
     </div>
