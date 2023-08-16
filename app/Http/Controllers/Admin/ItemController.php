@@ -45,7 +45,9 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+      return Inertia::render('Admin/Item/Show', [
+        'item' => $item,
+      ]);
     }
 
     /**
@@ -53,15 +55,23 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+      return Inertia::render('Admin/Item/Edit', [
+        'item' => $item,
+      ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Item $item)
+    public function update(ItemStoreRequest $request, Item $item)
     {
-        //
+      $validated = $request->validated();
+
+      $validated['price'] = (int) ($validated['price'] * 100);
+
+      $item->update($validated);
+
+      return redirect(route('admin.items.index'));
     }
 
     /**
