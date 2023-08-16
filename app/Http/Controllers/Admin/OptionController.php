@@ -48,7 +48,9 @@ class OptionController extends Controller
      */
     public function show(Option $option)
     {
-        //
+      return Inertia::render('Admin/Option/Show', [
+        'option' => $option,
+      ]);
     }
 
     /**
@@ -56,15 +58,23 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
-        //
+      return Inertia::render('Admin/Option/Edit', [
+        'option' => $option,
+      ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Option $option)
+    public function update(OptionStoreRequest $request, Option $option)
     {
-        //
+      $validated = $request->validated();
+
+      $validated['price'] = (int) ($validated['price'] * 100);
+
+      $option->update($validated);
+
+      return redirect(route('admin.options.index'));
     }
 
     /**

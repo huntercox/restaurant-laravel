@@ -98,8 +98,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             'names' => 'items',
         ]);
 
-      Route::resource('/options', OptionController::class)
-          ->except(['show']);
+      Route::resource('/options', OptionController::class);
 
         Route::resource('/menu-items', MenuItemController::class, [
             'names' => 'menu_items',

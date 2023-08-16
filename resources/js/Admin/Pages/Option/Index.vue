@@ -6,7 +6,7 @@ defineProps(['options']);
 </script>
 
 <template>
-  <Head title="Admin - Options" ></Head>
+  <Head><title>Admin: Options</title></Head>
 
   <AuthenticatedLayout>
 
@@ -29,7 +29,7 @@ defineProps(['options']);
         <template v-if="options.length !== 0">
           <div class="w-full bg-gray-200" v-for="option in options" :key="option.id" :option="option">
             <div class="bg-gray-600 text-white uppercase p-3">
-              <p class="font-black">{{ option.name }}</p>
+              <Link :href="`/admin/options/${option.id}`" class="font-black">{{ option.name }}</Link>
             </div>
           </div>
         </template>
