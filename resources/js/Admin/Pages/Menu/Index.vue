@@ -29,8 +29,8 @@ defineProps(['menus']);
                     </div>
 
 
-                    <div class="flex items-center justify-start gap-2 p-3">
-                        <div v-for="item in menu.items" class="border border-gray-600 p-2 px-3">
+                    <div class="grid-cols-3 grid gap-2 p-2">
+                        <div v-for="item in menu.items" class="border border-gray-600 p-2">
                             <p class="font-black text-lg">{{ item.name }}</p>
                             <p class="text-xs">{{ item.description }}</p>
                             <p class="text-right mt-4 font-bold text-sm">$ {{ (item.price / 100).toFixed(2) }}</p>
