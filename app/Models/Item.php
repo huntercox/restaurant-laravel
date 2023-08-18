@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Item extends Model
 {
@@ -24,4 +25,14 @@ class Item extends Model
     {
         return $this->belongsToMany(Cart::class, 'cart_items');
     }
+
+  /**
+   * Get all options for the item.
+   */
+  public function options()
+  {
+    return $this->belongsToMany(Option::class, 'optionables', 'optionable_id')
+                ->withPivot('option_category_id')
+                ->wherePivot('optionable_type', self::class);
+  }
 }

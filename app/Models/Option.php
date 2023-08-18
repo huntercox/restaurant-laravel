@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Option extends Model
 {
@@ -15,8 +16,12 @@ class Option extends Model
       'price',
     ];
 
-    public function optionCategory()
+    /**
+     * Get all items that are assigned this option.
+     */
+    public function items()
     {
-      return $this->belongsTo(OptionCategory::class);
+      return $this->morphedByMany(Item::class, 'optionable');
     }
+
 }

@@ -2,7 +2,10 @@
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
 
-defineProps(['item']);
+defineProps([
+  'item',
+  'selectedOptions'
+]);
 </script>
 
 <template>
@@ -21,10 +24,23 @@ defineProps(['item']);
 
 
     <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
-      <div class="flex items-center justify-start gap-2 p-3">
-          <p class="text-xs">{{ item.description }}</p>
-          <p class="text-right mt-4 font-bold text-sm">$ {{ item.price }}</p>
+
+      <div class="flex items-center">
+        <span class="w-32 uppercase font-black text-gray-800">Name: </span>
+          <p class="ml-4 text-sm">{{ item.name }}</p>
+        </div>
+
+      <div class="flex items-center">
+        <span class="w-32 uppercase font-black text-gray-800">Description: </span>
+            <p class="ml-4 text-sm">{{ item.description }}</p>
       </div>
+      <div class="flex items-center">
+          <span class="w-32 uppercase font-black text-gray-800">Price: </span>
+          <p class="ml-4 text-sm">$ {{ (item.price / 100).toFixed(2) }}</p>
+      </div>
+
+
+
     </div>
   </AuthenticatedLayout>
 </template>

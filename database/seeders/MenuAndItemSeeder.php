@@ -7,9 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Item;
-use App\Models\CartItem;
-use App\Models\Order;
-use App\Models\OrderItem;
+use App\Models\Option;
 use Illuminate\Support\Facades\DB;
 
 class MenuAndItemSeeder extends Seeder
@@ -19,23 +17,6 @@ class MenuAndItemSeeder extends Seeder
      */
     public function run()
     {
-        // Disable foreign key checks
-//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-//
-//        // Truncate your tables
-//        DB::table('order_items')->truncate();
-//        DB::table('cart_items')->truncate();
-//        DB::table('items')->truncate();
-//        DB::table('orders')->truncate();
-//        DB::table('menu_items')->truncate();
-//        DB::table('menus')->truncate();
-//        DB::table('statuses')->truncate();
-//        DB::table('coupons')->truncate();
-//        DB::table('users')->truncate();
-//
-//        // Re-enable foreign key checks
-//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
         // Menus
         $italianMenu = Menu::create(['name' => 'Italian']);
         $sidesMenu = Menu::create(['name' => 'Sides']);
@@ -66,7 +47,6 @@ class MenuAndItemSeeder extends Seeder
             'price' => round(2.99 * 100),
         ]);
 
-
         MenuItem::create([
             'menu_id' => $italianMenu->id,
             'item_id' => $pizza->id,
@@ -86,5 +66,16 @@ class MenuAndItemSeeder extends Seeder
             'menu_id' => $sidesMenu->id,
             'item_id' => $french_fries->id,
         ]);
+
+
+      // Options
+      //
+
+      $option1 = Option::create([
+            'name' => 'Extra Cheese',
+            'description' => "Option 1",
+            'price' => round(1.99 * 100),
+        ]);
+
     }
 }

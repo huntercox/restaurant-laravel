@@ -30,6 +30,9 @@ class ItemStoreRequest extends FormRequest
                 'min:0',  // price should be zero or positive
                 'regex:/^\d+(\.\d{1,2})?$/',  // price can have up to 2 decimal places
             ],
+            'optionRows' => 'array',
+            'optionRows.*.options' => 'array',
+            'optionRows.*.category' => 'nullable|string',
         ];
     }
 
@@ -47,6 +50,7 @@ class ItemStoreRequest extends FormRequest
             'name.max' => 'The name must not be longer than 40 characters.',
             'price.required' => 'The field "price" is required.',
             'price.regex' => 'The price must be a valid USD price (up to two decimal places).',
+            'optionRows' => 'Selected options must exist.',
         ];
     }
 }

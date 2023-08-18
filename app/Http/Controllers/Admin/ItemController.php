@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Option;
+use App\Models\OptionCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ItemStoreRequest;
 use App\Support\Inertia;
@@ -23,9 +25,11 @@ class ItemController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Option $option): \Inertia\Response
     {
-        return Inertia::render('Admin/Item/Create');
+        return Inertia::render('Admin/Item/Create', [
+          'existingOptions' => $option->latest()->get(),
+        ]);
     }
 
     /**
@@ -45,33 +49,57 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
+      $options = $item->options()->latest()->get();
       return Inertia::render('Admin/Item/Show', [
         'item' => $item,
+        'selectedOptions' => $options,
       ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Item $item)
+    public function edit(Item $item, Option $option)
     {
       return Inertia::render('Admin/Item/Edit', [
         'item' => $item,
+        'existingOptions' => $option->latest()->get(),
       ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ItemStoreRequest $request, Item $item)
+    public function update(Request $request, $itemId)
     {
-      $validated = $request->validated();
+      $item = Item::findOrFail($itemId);
 
-      $validated['price'] = (int) ($validated['price'] * 100);
+      // Detach all existing options
+      $item->options()->detach();
 
-      $item->update($validated);
+      // Iterate through the provided option rows
+      foreach ($request->input('optionRows') as $row) {
+        // Find or create the option category
+        $optionCategory = OptionCategory::firstOrCreate(['name' => $row['category']]);
 
-      return redirect(route('admin.items.index'));
+        foreach ($row['options'] as $optionId) {
+          // Find the option
+          $option = Option::find($optionId);
+          if ($option) {
+            // Attach the option to the item with the category
+            $item->options()->attach($optionId, ['option_category_id' => $optionCategory->id]);
+          }
+        }
+      }
+
+      // Update other fields
+      $item->update([
+        'name' => $request->input('name'),
+        'description' => $request->input('description'),
+        'price' => $request->input('price'),
+      ]);
+
+      return redirect()->route('admin.items.index');
     }
 
     /**
