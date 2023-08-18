@@ -534,6 +534,31 @@ class SkyPizzeria_Items extends Seeder
         'price' => round(9.99 * 100),
       ]);
 
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $spaghetti_meatballs->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $chicken_alfredo->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $black_pepper_chicken_alfredo->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $shrimp_bacon_alfredo->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $chicken_parmesan->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $spaghetti_menu->id,
+        'item_id' => $pizza_spaghetti->id,
+      ]);
+
       // Sky Zones
 
       $zones_menu = Menu::create(['name' => 'Sky Zones']);
