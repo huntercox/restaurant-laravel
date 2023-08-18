@@ -38,21 +38,21 @@ function updateCart() {
 
 		<div class="max-w-7xl mx-auto">
 
-			<div class="flex flex-col sm:flex-row gap-4 justify-stretch align-start">
+			<div class="grid-cols-2 grid gap-2">
 				<div class="w-full bg-gray-200 border border-red-600" v-for=" menu in menus" :key="menu.id" :menu="menu">
 					<div class="bg-red-600 text-white uppercase p-3">
 						<p class="font-black">{{ menu.name }}</p>
 					</div>
 
 
-					<div class="flex flex-col md:flex-row items-start justify-start gap-2 p-3">
+					<div class="grid-cols-2 grid gap-2 p-2">
 						<div v-for="item in menu.items" class="border border-gray-400 p-1 px-2 pb-0  w-full">
-							<div class="flex justify-between">
+							<div class="grid-cols-2">
 								<div class="">
 									<p class="font-black text-lg leading-4 mt-1">{{ item.name }}</p>
 									<p class="text-xs">{{ item.description }}</p>
 								</div>
-								<p class="text-right font-bold text-xl pt-2 leading-3">$ {{ (item.price / 100).toFixed(2) }}
+								<p class="text-right font-bold text-xl py-2 leading-3">$ {{ (item.price / 100).toFixed(2) }}
 								</p>
 							</div>
 							<!-- <button @click="addToCart(item)">Add to Cart</button> -->
