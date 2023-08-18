@@ -22,14 +22,14 @@ defineProps(['menus']);
 
         <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
 
-            <div class="flex gap-4 justify-center">
-                <div class="w-full bg-gray-200" v-for=" menu in menus" :key="menu.id" :menu="menu">
+            <div class="grid-cols-2 grid gap-2">
+                <div class="w-full bg-gray-200 border-slate-700 border-2" v-for=" menu in menus" :key="menu.id" :menu="menu">
                     <div class="bg-gray-600 text-white uppercase p-3">
                         <p class="font-black">{{ menu.name }}</p>
                     </div>
 
 
-                    <div class="grid-cols-3 grid gap-2 p-2">
+                    <div class="grid-cols-2 grid gap-2 p-2">
                         <div v-for="item in menu.items" class="border border-gray-600 p-2">
                             <p class="font-black text-lg">{{ item.name }}</p>
                             <p class="text-xs">{{ item.description }}</p>
