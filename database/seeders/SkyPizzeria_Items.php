@@ -605,6 +605,194 @@ class SkyPizzeria_Items extends Seeder
         'item_id' => $supreme_zone->id,
       ]);
 
+      // The Overloads menu
+
+      $overloads_menu = Menu::create(['name' => 'The Overloads']);
+
+      // pepperoni overload 10"
+      $pepperoni_overload_10 = Item::create([
+        'name' => 'Pepperoni Overload 10"',
+        'description' => "10\" pizza overloaded with pepperoni flavor topped with 3 different types of pepperonis - chopped pepperoni, thicker borough cut cupping pepperoni and our original pepperoni.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // pepperoni overload 14"
+      $pepperoni_overload_14 = Item::create([
+        'name' => 'Pepperoni Overload 14"',
+        'description' => "14\" pizza overloaded with pepperoni flavor topped with 3 different types of pepperonis - chopped pepperoni, thicker borough cut cupping pepperoni and our original pepperoni.",
+        'price' => round(17.99 * 100),
+      ]);
+
+      // sausage overload 10"
+      $sausage_overload_10 = Item::create([
+        'name' => 'Sausage Overload 10"',
+        'description' => "10\" pizza loaded with flavor for the sausage lover. Topped with 3 different types of sausage - A flavorful hand pulled Italian sausage, spicy sliced Italian Medallions and our original ground American sausage.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // sausage overload 14"
+      $sausage_overload_14 = Item::create([
+        'name' => 'Sausage Overload 14"',
+        'description' => "14\" pizza loaded with flavor for the sausage lover. Topped with 3 different types of sausage - A flavorful hand pulled Italian sausage, spicy sliced Italian Medallions and our original ground American sausage.",
+        'price' => round(17.99 * 100),
+      ]);
+
+      // cheese overload 10"
+      $cheese_overload_10 = Item::create([
+        'name' => 'Cheese Overload 10"',
+        'description' => "10\" pizza for the cheese fanatic blended perfectly with 5 different cheese flavors - mozzarella, provolone, Monterey Jack cheddar and a deliciously seasoned parmesan cheese.",
+        'price' => round(11.99 * 100),
+      ]);
+
+      // cheese overload 14"
+      $cheese_overload_14 = Item::create([
+        'name' => 'Cheese Overload 14"',
+        'description' => "14\" pizza for the cheese fanatic blended perfectly with 5 different cheese flavors - mozzarella, provolone, Monterey Jack cheddar and a deliciously seasoned parmesan cheese.",
+        'price' => round(15.99 * 100),
+      ]);
+
+      // veggie overload 10"
+      $veggie_overload_10 = Item::create([
+        'name' => 'Veggie Overload 10"',
+        'description' => "A colorful blend of 8 vegetables - mushrooms, black olives, green olives, green peppers, onion, sweet multi colored peppers, spinach leaves and tomatoes (when seasonably available). Optional upon request - banana pepper rings and jalapenos.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // veggie overload 14"
+      $veggie_overload_14 = Item::create([
+        'name' => 'Veggie Overload 14"',
+        'description' => "A colorful blend of 8 vegetables - mushrooms, black olives, green olives, green peppers, onion, sweet multi colored peppers, spinach leaves and tomatoes (when seasonably available). Optional upon request - banana pepper rings and jalapenos.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // ultimate meat overload 10"
+      $ultimate_meat_overload_10 = Item::create([
+        'name' => 'Ultimate Meat Overload 10"',
+        'description' => "An incredible pizza blended with the huge flavor of 9 meats - chopped pepperoni, thicker borough cut cupping pepperoni, our original pepperoni, hand pulled Italian sausage, spicy sliced Italian medallions, our original ground American sausage, smoked ham, beef and bacon.",
+        'price' => round(19.99 * 100),
+      ]);
+
+      // ultimate meat overload 14"
+      $ultimate_meat_overload_14 = Item::create([
+        'name' => 'Ultimate Meat Overload 14"',
+        'description' => "An incredible pizza blended with the huge flavor of 9 meats - chopped pepperoni, thicker borough cut cupping pepperoni, our original pepperoni, hand pulled Italian sausage, spicy sliced Italian medallions, our original ground American sausage, smoked ham, beef and bacon.",
+        'price' => round(25.99 * 100),
+      ]);
+
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $pepperoni_overload_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $pepperoni_overload_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $sausage_overload_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $sausage_overload_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $cheese_overload_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $cheese_overload_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $veggie_overload_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $veggie_overload_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $ultimate_meat_overload_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $overloads_menu->id,
+        'item_id' => $ultimate_meat_overload_14->id,
+      ]);
+
+
+      // Extras menu
+
+      $extras_menu = Menu::create(['name' => 'Extras']);
+
+
+      // Cheese cup
+      $cheese_cup = Item::create([
+        'name' => 'Cheese Cup',
+        'description' => "Cheese Cup.",
+        'price' => round(1.25 * 100),
+      ]);
+
+      // Marinara cup
+      $marinara_cup = Item::create([
+        'name' => 'Marinara Cup',
+        'description' => "Marinara Cup.",
+        'price' => round(1.25 * 100),
+      ]);
+
+      // Ranch Dressing cup
+      $ranch_cup = Item::create([
+        'name' => 'Ranch Dressing Cup',
+        'description' => "Ranch Dressing Cup.",
+        'price' => round(1.25 * 100),
+      ]);
+
+      // BBQ Sauce cup
+      $bbq_cup = Item::create([
+        'name' => 'BBQ Sauce Cup',
+        'description' => "BBQ Sauce Cup.",
+        'price' => round(1.25 * 100),
+      ]);
+
+
+      // Dessert menu
+
+      $dessert_menu = Menu::create(['name' => 'Desserts']);
+
+      // Iced Cinna Sticks
+      $iced_cinna_sticks = Item::create([
+        'name' => 'Iced Cinna Sticks',
+        'description' => "Iced Cinna Sticks.",
+        'price' => round(5.49 * 100),
+      ]);
+
+      // double chocolate brownie cookie
+      $double_chocolate_brownie_cookie = Item::create([
+        'name' => 'Double Chocolate Brownie Cookie',
+        'description' => "Double Chocolate Brownie Cookie.",
+        'price' => round(4.99 * 100),
+      ]);
+
+      // chocolate chip cookie
+      $chocolate_chip_cookie = Item::create([
+        'name' => 'Chocolate Chip Cookie',
+        'description' => "Hot freshly baked large 8\" in diameter - cut into 8 pieces.",
+        'price' => round(4.99 * 100),
+      ]);
+
+      MenuItem::create([
+        'menu_id' => $dessert_menu->id,
+        'item_id' => $iced_cinna_sticks->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $dessert_menu->id,
+        'item_id' => $double_chocolate_brownie_cookie->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $dessert_menu->id,
+        'item_id' => $chocolate_chip_cookie->id,
+      ]);
+
 
 
 
