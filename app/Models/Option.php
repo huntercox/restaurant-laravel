@@ -19,9 +19,14 @@ class Option extends Model
     /**
      * Get all items that are assigned this option.
      */
-    public function items()
+    public function items(): MorphToMany
     {
       return $this->morphedByMany(Item::class, 'optionable')->withPivot('option_category_id');
     }
+
+  public function optionCategory(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(OptionCategory::class, 'option_category_id');
+  }
 
 }

@@ -49,10 +49,26 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-      $options = $item->options()->latest()->get();
+      // Get the options along with the option category
+      $optionsWithCategory = $item->options()->withPivot('option_category_id')->latest()->get();
+
+
+      // Map the options to include the option category
+      $selectedOptions = $optionsWithCategory->map(function ($option) {
+        // Get the option category using the option_category_id from the pivot table
+        $optionCategory = OptionCategory::find($option->pivot->option_category_id);
+
+        return [
+          'name' => $option->name,
+          'description' => $option->description,
+          'price' => $option->price,
+          'category' => $optionCategory->name, // assuming the name property exists
+        ];
+      });
+
       return Inertia::render('Admin/Item/Show', [
         'item' => $item,
-        'selectedOptions' => $options,
+        'selectedOptions' => $selectedOptions,
       ]);
     }
 
