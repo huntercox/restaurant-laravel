@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolePermissionSeeder::class,
             SkyPizzeria_Items::class,
+            SkyPizzeria_Options::class,
         ]);
 
         $user = User::create([
