@@ -794,6 +794,211 @@ class SkyPizzeria_Items extends Seeder
       ]);
 
 
+      // Specialty Pizzas
+
+      $specialty_pizzas_menu = Menu::create(['name' => 'Specialty Pizzas']);
+
+      // Chicken Bacon BBQ 10"
+      $chicken_bacon_bbq_10 = Item::create([
+        'name' => 'Chicken Bacon BBQ 10"',
+        'description' => "10\" - Seasoned grilled chicken, bacon, with BBQ sauce. Optional upon request - add onions.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // Chicken Bacon BBQ 14"
+      $chicken_bacon_bbq_14 = Item::create([
+        'name' => 'Chicken Bacon BBQ 14"',
+        'description' => "14\" - Seasoned grilled chicken, bacon, with BBQ sauce. Optional upon request - add onions.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // Chicken Bacon Ranch 10"
+      $chicken_bacon_ranch_10 = Item::create([
+        'name' => 'Chicken Bacon Ranch 10"',
+        'description' => "10\" - Seasoned grilled chicken, bacon, with ranch sauce. Optional upon request - add onions.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // Chicken Bacon Ranch 14"
+      $chicken_bacon_ranch_14 = Item::create([
+        'name' => 'Chicken Bacon Ranch 14"',
+        'description' => "14\" - Seasoned grilled chicken, bacon, with ranch sauce. Optional upon request - add onions.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // Chicken Alfredo Pizza 10"
+      $chicken_alfredo_pizza_10 = Item::create([
+        'name' => 'Chicken Alfredo Pizza 10"',
+        'description' => "10\" - Seasoned grilled chicken, fresh spinach leaves and mushrooms, with Alfredo sauce. Optional upon request - add onions.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // Chicken Alfredo Pizza 14"
+      $chicken_alfredo_pizza_14 = Item::create([
+        'name' => 'Chicken Alfredo Pizza 14"',
+        'description' => "14\" - Seasoned grilled chicken, fresh spinach leaves and mushrooms, with Alfredo sauce. Optional upon request - add onions.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // Buffalo Chicken Pizza 10"
+      $buffalo_chicken_pizza_10 = Item::create([
+        'name' => 'Buffalo Chicken Pizza 10"',
+        'description' => "10\" - Seasoned grilled chicken and banana pepper rings with mild buffalo sauce and ranch dressy drizzled on top.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // Buffalo Chicken Pizza 14"
+      $buffalo_chicken_pizza_14 = Item::create([
+        'name' => 'Buffalo Chicken Pizza 14"',
+        'description' => "14\" -  Seasoned grilled chicken and banana pepper rings with mild buffalo sauce and ranch dressy drizzled on top.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // The Hawaiian Sunrise 10"
+      $hawaiian_sunrise_10 = Item::create([
+        'name' => 'The Hawaiian Sunrise 10"',
+        'description' => "10\" - Seasoned grilled chicken, sweet colored peppers and pineapple with BBQ sauce.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // The Hawaiian Sunrise 14"
+      $hawaiian_sunrise_14 = Item::create([
+        'name' => 'The Hawaiian Sunrise 14"',
+        'description' => "14\" - Seasoned grilled chicken, sweet colored peppers and pineapple with BBQ sauce.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // The Hawaiian Sunset 10"
+      $hawaiian_sunset_10 = Item::create([
+        'name' => 'The Hawaiian Sunset 10"',
+        'description' => "10\" - Smoked ham, sweet colored peppers and pineapple with BBQ sauce.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // The Hawaiian Sunset 14"
+      $hawaiian_sunset_14 = Item::create([
+        'name' => 'The Hawaiian Sunset 14"',
+        'description' => "14\" - Smoked ham, sweet colored peppers and pineapple with BBQ sauce.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // The Deluxe 10"
+      $the_deluxe_10 = Item::create([
+        'name' => 'The Deluxe 10"',
+        'description' => "10\" - Pepperoni, sausage, mushrooms, onions and green peppers.",
+        'price' => round(13.99 * 100),
+      ]);
+
+      // The Deluxe 14"
+      $the_deluxe_14 = Item::create([
+        'name' => 'The Deluxe 14"',
+        'description' => "14\" - Pepperoni, sausage, mushrooms, onions and green peppers.",
+        'price' => round(16.99 * 100),
+      ]);
+
+      // The Meat 10"
+      $the_meat_10 = Item::create([
+        'name' => 'The Meat 10"',
+        'description' => "10\" - Pepperoni, sausage, ham, bacon and beef.",
+        'price' => round(14.99 * 100),
+      ]);
+
+      // The Meat 14"
+      $the_meat_14 = Item::create([
+        'name' => 'The Meat 14"',
+        'description' => "14\" - Pepperoni, sausage, ham, bacon and beef.",
+        'price' => round(19.99 * 100),
+      ]);
+
+      // The Supreme 10"
+      $the_supreme_10 = Item::create([
+        'name' => 'The Supreme 10"',
+        'description' => "10\" - Pepperoni, sausage, mushrooms, onions, green peppers, black olives and banana pepper rings.",
+        'price' => round(15.99 * 100),
+      ]);
+
+      // The Supreme 14"
+      $the_supreme_14 = Item::create([
+        'name' => 'The Supreme 14"',
+        'description' => "14\" - Pepperoni, sausage, mushrooms, onions, green peppers, black olives and banana pepper rings.",
+        'price' => round(21.99 * 100),
+      ]);
+
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_bacon_bbq_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_bacon_bbq_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_bacon_ranch_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_bacon_ranch_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_alfredo_pizza_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $chicken_alfredo_pizza_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $buffalo_chicken_pizza_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $buffalo_chicken_pizza_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $hawaiian_sunrise_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $hawaiian_sunrise_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $hawaiian_sunset_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $hawaiian_sunset_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_deluxe_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_deluxe_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_meat_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_meat_14->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_supreme_10->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $specialty_pizzas_menu->id,
+        'item_id' => $the_supreme_14->id,
+      ]);
+
+
+
 
 
     }
