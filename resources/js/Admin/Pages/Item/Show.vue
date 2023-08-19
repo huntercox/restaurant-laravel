@@ -1,11 +1,22 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Admin/Layouts/AuthenticatedLayout.vue';
+import { computed } from 'vue';
 
-defineProps([
+const props = defineProps([
   'item',
   'selectedOptions'
 ]);
+
+const groupedOptions = computed(() => {
+  return props.selectedOptions.reduce((groups, option) => {
+    if (!groups[option.category]) {
+      groups[option.category] = [];
+    }
+    groups[option.category].push(option);
+    return groups;
+  }, {});
+});
 </script>
 
 <template>
@@ -39,7 +50,20 @@ defineProps([
           <p class="ml-4 text-sm">$ {{ (item.price / 100).toFixed(2) }}</p>
       </div>
 
+        <div v-if="groupedOptions !== null || groupedOptions.length !== 0">
+          <div v-for="(options, category) in groupedOptions" :key="category">
 
+
+            <div class="flex items-start">
+              <span class="w-32 uppercase font-black text-gray-800">{{ category }}: </span>
+              <ul class="ml-4 mt-1">
+                <li v-for="option in options" :key="option.name" class="text-sm">
+                  {{ option.name }} - ${{ (option.price / 100).toFixed(2) }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
     </div>
   </AuthenticatedLayout>
