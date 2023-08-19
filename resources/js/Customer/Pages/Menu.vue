@@ -38,7 +38,7 @@ function updateCart() {
 
 		<div class="max-w-7xl mx-auto">
 
-			<div class="grid-cols-2 grid gap-2">
+			<div class="grid-cols-1 md:grid-cols-2 grid gap-2">
 				<div class="w-full bg-gray-200 border border-red-600" v-for=" menu in menus" :key="menu.id" :menu="menu">
 					<div class="bg-red-600 text-white uppercase p-3">
 						<p class="font-black">{{ menu.name }}</p>
