@@ -31,8 +31,6 @@ class Item extends Model
    */
   public function options()
   {
-    return $this->belongsToMany(Option::class, 'optionables', 'optionable_id')
-                ->withPivot('option_category_id')
-                ->wherePivot('optionable_type', self::class);
+    return $this->morphToMany(Option::class, 'optionable')->withPivot('option_category_id');
   }
 }

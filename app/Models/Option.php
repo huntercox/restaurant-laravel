@@ -21,7 +21,7 @@ class Option extends Model
      */
     public function items()
     {
-      return $this->morphedByMany(Item::class, 'optionable');
+      return $this->morphedByMany(Item::class, 'optionable')->withPivot('option_category_id');
     }
 
 }
