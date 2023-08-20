@@ -61,7 +61,7 @@ function closeOptionsModal() {
         </button>
       </div>
       <!-- Content of the modal goes here -->
-      <OptionSelection :options="selectedItemOptions" :item="selectedItem" />
+      <OptionSelection :item="selectedItem" />
     </div>
   </div>
 

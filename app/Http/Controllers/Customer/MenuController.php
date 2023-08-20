@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     public function __invoke(): Response
     {
-        $menus = Menu::with('items')->get();
+        $menus = Menu::with('items.options')->get();
         return Inertia::render('Menu', [
             'menus' => $menus
         ]);

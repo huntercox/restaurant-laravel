@@ -95,11 +95,11 @@ Route::delete('/cart', [CartController::class, 'destroy']);
 Route::post('/apply-coupon', [CouponController::class, 'apply']);
 
 
-Route::get('/view-cart', function () {
+Route::get('/view-cart', static function () {
   return Inertia::render('ViewCart');
 });
 
-Route::get('/checkout', function () {
+Route::get('/checkout', static function () {
   return Inertia::render('Checkout');
 });
 
