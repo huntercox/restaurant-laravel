@@ -24,9 +24,4 @@ class Option extends Model
       return $this->morphedByMany(Item::class, 'optionable')->withPivot('option_category_id');
     }
 
-  public function optionCategory(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-  {
-    return $this->belongsTo(OptionCategory::class, 'option_category_id');
-  }
-
 }

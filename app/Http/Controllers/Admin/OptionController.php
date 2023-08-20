@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OptionStoreRequest;
 use App\Models\Option;
+use App\Models\OptionCategory;
 use App\Support\Inertia;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,24 @@ class OptionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-      $options = Option::latest()->get();
+      $options = Option::with(['items' => function ($query) {
+        $query->withPivot('option_category_id');
+      }])->get();
+
+      $formattedOptions = $options->map(function ($option) {
+        $category = OptionCategory::find($option->items->first()->pivot->option_category_id);
+        return [
+          'name' => $option->name,
+          'description' => $option->description,
+          'price' => $option->price,
+          'category' => $category->name,
+        ];
+      });
+
       return Inertia::render('Admin/Option/Index', [
-        'options' => $options,
+        'options' => $formattedOptions,
       ]);
     }
 

@@ -47,7 +47,7 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Item $item)
+    public function show(Item $item): \Inertia\Response
     {
       // Get the options along with the option category
       $optionsWithCategory = $item->options()->withPivot('option_category_id')->latest()->get();
@@ -75,7 +75,7 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Item $item, Option $option)
+    public function edit(Item $item, Option $option): \Inertia\Response
     {
       return Inertia::render('Admin/Item/Edit', [
         'item' => $item,
@@ -86,7 +86,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $itemId)
+    public function update(Request $request, $itemId): \Illuminate\Http\RedirectResponse
     {
       $item = Item::findOrFail($itemId);
 

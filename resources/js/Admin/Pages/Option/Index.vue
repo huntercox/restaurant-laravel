@@ -22,14 +22,14 @@ defineProps(['options']);
 
     <div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8">
 
-      <div class="flex gap-4 justify-center">
+      <div class="grid grid-cols-3 gap-2">
         <template v-if="options === null">
           <p>Sorry, but no options are available at this time.</p>
         </template>
         <template v-if="options.length !== 0">
           <div class="w-full bg-gray-200" v-for="option in options" :key="option.id" :option="option">
             <div class="bg-gray-600 text-white uppercase p-3">
-              <Link :href="`/admin/options/${option.id}`" class="font-black">{{ option.name }}</Link>
+              <Link :href="`/admin/options/${option.id}`" class="font-black">{{ option.name }} <span class="lowercase italic text-xs">({{ option.category }})</span></Link>
             </div>
           </div>
         </template>

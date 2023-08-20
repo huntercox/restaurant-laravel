@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Item;
+use App\Models\Menu;
 use App\Models\Option;
 use App\Models\OptionCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,34 +17,35 @@ class SkyPizzeria_Options extends Seeder
     public function run(): void
     {
 
-      $cheese_personal = Item::where('name', 'Cheese Personal')->first();
+      // Find the Pizza menu
+      $pizza_menu = Menu::where('name', 'Pizza')->first();
 
-      // Make sure the item was found before proceeding
-      if ($cheese_personal) {
         // Toppings category
         $toppingCategory = OptionCategory::create(['name' => 'Toppings']);
 
         // Toppings
         $toppings = [
-          'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olives', 'mushroom', 'banana pepper rings', 'jalapenos', 'pineapple', 'grilled chicken'
+          'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olive', 'mushroom', 'banana pepper rings', 'jalapeno', 'pineapple', 'grilled chicken'
         ];
 
-        // Price for each topping of a Personal size pizza
-        $topping_price = round(0.65 * 100);
+      // Create a Toppings option category
+      $toppings_category = OptionCategory::firstOrCreate(['name' => 'Toppings']);
 
-        foreach ($toppings as $topping) {
-          $option = Option::create([
-            'name' => ucfirst($topping),
-            'description' => ucfirst($topping) . ' topping',
-            'price' => $topping_price,
-          ]);
+      // Create the toppings options and attach them to the category
+      $topping_options = collect($toppings)->map(function ($topping) {
+        return Option::create([
+          'name' => ucfirst($topping),
+          'description' => ucfirst($topping) . ' topping',
+          'price' => 65, // $0.65 in cents
+        ]);
+      });
 
-          // Attach the option to the item (pizza)
-          $cheese_personal->options()->attach($option->id, ['option_category_id' => $toppingCategory->id]);
-        }
-
-      }
-
-
+      // Loop through all the items on the Pizza menu and attach the toppings options to each item
+      $pizza_menu->items->each(function (Item $item) use ($topping_options, $toppings_category) {
+        $syncData = $topping_options->mapWithKeys(function ($option) use ($toppings_category) {
+          return [$option->id => ['option_category_id' => $toppings_category->id]];
+        })->toArray();
+        $item->options()->sync($syncData);
+      });
     }
 }
