@@ -16,7 +16,12 @@ class CartItem extends Model
         'quantity',
         'price',
         'user_id',
+        'selected_options',
     ];
+
+  protected $casts = [
+    'selected_options' => 'array',
+  ];
 
     public function cart(): BelongsTo
     {

@@ -83,10 +83,8 @@ class CartController extends Controller
             ]);
         }
 
-
       // After modifying cart items
       $cart->calculate();
-
 
       return redirect()->back()->with('message', 'Cart updated successfully');
     }
