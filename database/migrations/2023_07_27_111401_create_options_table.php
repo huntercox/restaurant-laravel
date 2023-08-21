@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('price');
+            $table->foreignId('category_id')->nullable()->constrained('option_categories');
             $table->timestamps();
         });
     }

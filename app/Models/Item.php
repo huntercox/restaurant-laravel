@@ -29,8 +29,10 @@ class Item extends Model
   /**
    * Get all options for the item.
    */
-  public function options()
+  public function options(): MorphToMany
   {
-    return $this->morphToMany(Option::class, 'optionable')->withPivot('option_category_id');
+    return $this->morphToMany(Option::class, 'optionable')
+      ->withPivot('option_category_id')
+      ->with('category');
   }
 }

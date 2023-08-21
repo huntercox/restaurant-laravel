@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -23,19 +23,35 @@ function addCartItemWithSelectedOptions() {
     selected_options: optionsPayload,
   });
 }
+
+const groupedOptions = computed(() => {
+  return props.item?.options.reduce((groups, option) => {
+    const categoryName = option.category.name;
+    if (!groups[categoryName]) {
+      groups[categoryName] = [];
+    }
+    groups[categoryName].push(option);
+    return groups;
+  }, {});
+});
+
 </script>
 
 <template>
   <div>
     <p class="text-md font-semibold">{{ props.item?.name }}</p>
-    <p class="text-2xl mb-3 border-2 border-b-gray-900">Options: </p>
-    <div v-for="option in props.item?.options" :key="option.id">
-      <!-- Render option here -->
-      <label>
-        <input type="checkbox" v-model="selectedOptions[option.id]" />
-        {{ option.name }} ({{ option.price }})
-      </label>
+    <p class="text-2xl mb-3">Options </p>
+    <div v-for="(options, category) in groupedOptions" :key="category">
+      <h3 class="uppercase font-black">{{ category }}</h3> <!-- Category label -->
+      <div v-for="option in options" :key="option.id">
+        <!-- Render option here -->
+        <label>
+          <input type="checkbox" v-model="selectedOptions[option.id]" />
+          {{ option.name }} <span class="text-xs italic">(${{(option.price/100).toFixed(2) }})</span>
+        </label>
+      </div>
     </div>
+
     <button @click="addCartItemWithSelectedOptions" class="text-white rounded-sm bg-red-500 py-2 pt-2 mb-2 leading-2 px-2 mt-4 text-sm uppercase font-semibold hover:bg-red-400">Add to Cart</button>
   </div>
 </template>

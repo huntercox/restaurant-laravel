@@ -12,4 +12,9 @@ class OptionCategory extends Model
     protected $fillable = [
       'name',
     ];
+
+  public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
+  {
+    return $this->hasMany(Option::class);
+  }
 }

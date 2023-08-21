@@ -14,6 +14,7 @@ class Option extends Model
       'name',
       'description',
       'price',
+      'category_id',
     ];
 
     /**
@@ -22,6 +23,11 @@ class Option extends Model
     public function items(): MorphToMany
     {
       return $this->morphedByMany(Item::class, 'optionable')->withPivot('option_category_id');
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+      return $this->belongsTo(OptionCategory::class);
     }
 
 }
