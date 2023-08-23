@@ -17,36 +17,41 @@ class SkyPizzeria_Options extends Seeder
      */
     public function run(): void
     {
+    /**
+     * TOPPINGS
+     */
+      // Get all the pizza-related items
+      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
 
-      // Find the Pizza menu
-      $pizza_menu = Menu::where('name', 'Pizza')->first();
+      // Create a Toppings option category
+      $toppings_category = OptionCategory::firstOrCreate(['name' => 'Toppings']);
 
-        // Toppings category
-        $toppings = [
-          'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olive', 'mushroom', 'banana pepper rings', 'jalapeno', 'pineapple', 'grilled chicken'
-        ];
+      // Your existing toppings array
+      $toppings = [
+        'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olive', 'mushroom', 'banana pepper rings', 'jalapeno', 'pineapple', 'grilled chicken'
+      ];
 
-        // Create a Toppings option category
-        $toppings_category = OptionCategory::firstOrCreate(['name' => 'Toppings']);
+      // Create the toppings options and attach them to the category
+      $topping_options = collect($toppings)->map(function ($topping) use ($toppings_category) {
+        return Option::create([
+          'name' => ucfirst($topping),
+          'description' => ucfirst($topping) . ' topping',
+          'price' => 65, // $0.65 in cents,
+          'category_id' => $toppings_category->id,
+        ]);
+      });
 
-        // Create the toppings options and attach them to the category
-        $topping_options = collect($toppings)->map(function ($topping) use ($toppings_category) {
-          return Option::create([
-            'name' => ucfirst($topping),
-            'description' => ucfirst($topping) . ' topping',
-            'price' => 65, // $0.65 in cents,
-            'category_id' => $toppings_category->id,
-          ]);
-        });
+      // Loop through all the pizza-related items and attach the toppings options to each item
+      $pizza_items->each(function (Item $item) use ($topping_options) {
+        $syncData = $topping_options->mapWithKeys(function ($option) {
+          return [$option->id => ['option_category_id' => $option->category_id]];
+        })->toArray();
+        $item->options()->sync($syncData);
+      });
 
-        // Loop through all the items on the Pizza menu and attach the toppings options to each item
-        $pizza_menu->items->each(function (Item $item) use ($topping_options) {
-          $syncData = $topping_options->mapWithKeys(function ($option) {
-            return [$option->id => ['option_category_id' => $option->category_id]];
-          })->toArray();
-          $item->options()->sync($syncData);
-        });
-
+      /**
+       * CRUSTS
+       */
 
       // Create a Crust option category
       $crust_category = OptionCategory::firstOrCreate(['name' => 'Crust']);
@@ -79,7 +84,10 @@ class SkyPizzeria_Options extends Seeder
         return [$option->id => ['option_category_id' => $option->category_id]];
       })->toArray();
 
-      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
+      // Get all the pizza-related items, excluding the "no crust pizza" item
+      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten()->reject(function ($item) {
+        return Str::contains(strtolower($item->name), 'no crust pizza');
+      });
 
       // Attach the crust options with cauliflower to the 10" pizza items
       $pizza_items_with_10_inch_crust = $pizza_items->filter(function ($item) {
@@ -96,5 +104,39 @@ class SkyPizzeria_Options extends Seeder
       $pizza_items_without_10_inch_crust->each(function (Item $item) use ($syncDataForOthers) {
         $item->options()->syncWithoutDetaching($syncDataForOthers);
       });
+
+
+      /**
+       * SAUCES
+       */
+
+      // Create a Sauce option category
+      $sauce_category = OptionCategory::firstOrCreate(['name' => 'Sauce']);
+
+      // SAUCES-traditional pizza sauce, bbq, ranch, buffalo mild, buffalo hot
+      $sauce_options = collect(['pizza', 'bbq', 'ranch', 'buffalo mild', 'buffalo hot'])->map(function ($sauce) use ($sauce_category) {
+        return Option::create([
+          'name' => ucfirst($sauce),
+          'description' => ucfirst($sauce) . ' sauce',
+          'price' => 0,
+          'category_id' => $sauce_category->id,
+        ]);
+      });
+
+      $syncDataForSauces = $sauce_options->mapWithKeys(function ($option) {
+        return [$option->id => ['option_category_id' => $option->category_id]];
+      })->toArray();
+
+      // Get all the pizza-related items, including the "no crust pizza" item
+      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
+
+      // Attach the sauce options to the pizza items
+      $pizza_items->each(function (Item $item) use ($syncDataForSauces) {
+        $item->options()->syncWithoutDetaching($syncDataForSauces);
+      });
+
+
+
+
     }
 }

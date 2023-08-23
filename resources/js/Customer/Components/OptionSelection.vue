@@ -33,6 +33,7 @@ const groupedOptions = computed(() => {
   }, {});
 });
 const selectedCrust = ref(null);
+const selectedSauce = ref(null);
 
 // PRICING
 const totalPrice = ref(props.item.price);
@@ -84,6 +85,12 @@ watch(selectedOptions, () => {
             v-if="category === 'Crust'"
             type="radio"
             v-model="selectedCrust"
+            :value="option.id"
+          />
+          <input
+            v-else-if="category === 'Sauce'"
+            type="radio"
+            v-model="selectedSauce"
             :value="option.id"
           />
           <input
