@@ -36,15 +36,38 @@ const selectedCrust = ref(null);
 const selectedSauce = ref(null);
 
 // PRICING
-const totalPrice = ref(props.item.price);
+
+// Extract the number of included toppings from the item name
+const includedToppings = ref(0);
+if (props.item.name.match(/(\d+) Topping/)) {
+  includedToppings.value = parseInt(RegExp.$1);
+}
+
+// Modified Pricing Calculation
 const calculateTotalPrice = computed(() => {
   let price = props.item.price; // Start with the base item price
 
-  // Calculate the price from the checkboxes
+  // Get the topping options
+  const toppingOptions = props.item.options.filter(
+    (option) => option.category.name === "Toppings"
+  );
+
+  let toppingsCount = 0;
   for (let optionId in selectedOptions.value) {
     if (selectedOptions.value[optionId]) {
-      const option = props.item.options.find(o => o.id === parseInt(optionId));
-      if (option && option.price > 0) { // Only add the price if greater than 0
+      const option = props.item.options.find(
+        (o) => o.id === parseInt(optionId)
+      );
+      if (option && option.category.name === "Toppings") {
+        if (toppingsCount < includedToppings.value) {
+          // Don't add the price for the included toppings
+          toppingsCount++;
+        } else {
+          // Add the price for additional toppings
+          price += option.price;
+        }
+      } else if (option && option.price > 0) {
+        // Add the price for non-topping options
         price += option.price;
       }
     }
@@ -52,23 +75,6 @@ const calculateTotalPrice = computed(() => {
 
   return price; // Return as integer
 });
-
-watch(selectedOptions, () => {
-  // Calculate the price for each selected option
-  let optionsPrice = 0;
-  for (let optionId in selectedOptions.value) {
-    if (selectedOptions.value[optionId]) {
-      const option = props.item.options.find(o => o.id === parseInt(optionId));
-      if (option) {
-        optionsPrice += option.price;
-      }
-    }
-  }
-
-  // Update the total price with item's base price and options price
-  totalPrice.value = props.item.price + optionsPrice;
-});
-
 </script>
 
 <template>
