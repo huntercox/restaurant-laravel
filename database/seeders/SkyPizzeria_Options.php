@@ -17,52 +17,85 @@ class SkyPizzeria_Options extends Seeder
      */
     public function run(): void
     {
+
+
+
+
     /**
      * TOPPINGS
      */
-      // Get all the pizza-related items
-      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
+        // Get all the pizza-related items
+        $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
 
-      // Create a Toppings option category
-      $toppings_category = OptionCategory::firstOrCreate(['name' => 'Toppings']);
+        // Create a Toppings option category
+        $toppings_category = OptionCategory::firstOrCreate(['name' => 'Toppings']);
 
-      // Your existing toppings array
-      $toppings = [
-        'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olive', 'mushroom', 'banana pepper rings', 'jalapeno', 'pineapple', 'grilled chicken'
-      ];
+        // Your existing toppings array
+        $toppings = [
+          'pepperoni', 'sausage', 'beef', 'bacon', 'ham', 'onion', 'green pepper', 'black olive', 'green olive', 'mushroom', 'banana pepper rings', 'jalapeno', 'pineapple', 'grilled chicken'
+        ];
 
-      $pizza_items->each(function (Item $item) use ($toppings_category, $toppings) {
-        $sizePrice = 0;
+        $pizza_items->each(function (Item $item) use ($toppings_category, $toppings) {
+          $sizePrice = 0;
 
-        if (Str::contains(strtolower($item->name), 'personal')) {
-          $sizePrice = 65; // $0.65 in cents for personal pizza
-        } elseif (Str::contains($item->name, '10"')) {
-          $sizePrice = 125; // $1.25 in cents for 10" pizza
-        } elseif (Str::contains($item->name, '14"')) {
-          $sizePrice = 175; // $1.75 in cents for 14" pizza
-        }
+          if (Str::contains(strtolower($item->name), 'personal')) {
+            $sizePrice = 65; // $0.65 in cents for personal pizza
+          } elseif (Str::contains($item->name, '10"')) {
+            $sizePrice = 125; // $1.25 in cents for 10" pizza
+          } elseif (Str::contains($item->name, '14"')) {
+            $sizePrice = 175; // $1.75 in cents for 14" pizza
+          }
 
-        $topping_options = collect($toppings)->map(function ($topping) use ($toppings_category, $sizePrice) {
-          return Option::create([
-            'name' => ucfirst($topping),
-            'description' => ucfirst($topping) . ' topping',
-            'price' => $sizePrice,
-            'category_id' => $toppings_category->id,
-          ]);
+          $topping_options = collect($toppings)->map(function ($topping) use ($toppings_category, $sizePrice) {
+            return Option::create([
+              'name' => ucfirst($topping),
+              'description' => ucfirst($topping) . ' topping',
+              'price' => $sizePrice,
+              'category_id' => $toppings_category->id,
+            ]);
+          });
+
+          $syncData = $topping_options->mapWithKeys(function ($option) {
+            return [$option->id => ['option_category_id' => $option->category_id]];
+          })->toArray();
+
+          $item->options()->sync($syncData);
         });
 
-        $syncData = $topping_options->mapWithKeys(function ($option) {
-          return [$option->id => ['option_category_id' => $option->category_id]];
-        })->toArray();
+    /**
+     * EXTRA CHEESE
+     */
+        // Get all the pizza-related items
+        $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
 
-        $item->options()->sync($syncData);
-      });
+        // Create an "Extra Cheese" option category
+        $extra_cheese_category = OptionCategory::firstOrCreate(['name' => 'Extra Cheese']);
 
+        $pizza_items->each(function (Item $item) use ($extra_cheese_category) {
+          $extraCheesePrice = 0;
+
+          // Determine the price for the "Extra Cheese" based on the pizza size
+          if (Str::contains(strtolower($item->name), 'personal')) {
+            $extraCheesePrice = 80; // $0.80 in cents for personal pizza
+          } elseif (Str::contains($item->name, '10"')) {
+            $extraCheesePrice = 150; // $1.50 in cents for 10" pizza
+          } elseif (Str::contains($item->name, '14"')) {
+            $extraCheesePrice = 225; // $2.25 in cents for 14" pizza
+          }
+
+          $extra_cheese_option = Option::create([
+            'name' => 'Extra Cheese',
+            'description' => 'Extra cheese topping',
+            'price' => $extraCheesePrice,
+            'category_id' => $extra_cheese_category->id,
+          ]);
+
+          $item->options()->attach($extra_cheese_option->id, ['option_category_id' => $extra_cheese_category->id]);
+        });
 
       /**
        * CRUSTS
        */
-
       // Create a Crust option category
       $crust_category = OptionCategory::firstOrCreate(['name' => 'Crust']);
 
@@ -119,7 +152,6 @@ class SkyPizzeria_Options extends Seeder
       /**
        * SAUCES
        */
-
       // Create a Sauce option category
       $sauce_category = OptionCategory::firstOrCreate(['name' => 'Sauce']);
 
@@ -144,9 +176,6 @@ class SkyPizzeria_Options extends Seeder
       $pizza_items->each(function (Item $item) use ($syncDataForSauces) {
         $item->options()->syncWithoutDetaching($syncDataForSauces);
       });
-
-
-
 
     }
 }
