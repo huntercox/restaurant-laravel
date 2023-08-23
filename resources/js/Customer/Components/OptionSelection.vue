@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
   options: Array,
@@ -9,8 +9,6 @@ const props = defineProps({
 
 const selectedOptions = ref({});
 
-const { $inertia } = usePage();
-
 function addCartItemWithSelectedOptions() {
   // You can prepare selected options here
   const optionsPayload = Object.entries(selectedOptions.value)
@@ -18,7 +16,7 @@ function addCartItemWithSelectedOptions() {
     .map(([optionId]) => optionId);
 
   // Post to your server with selected options
-  $inertia.post('/cart', {
+  router.post('/cart', {
     item: props.item,
     selected_options: optionsPayload,
   });

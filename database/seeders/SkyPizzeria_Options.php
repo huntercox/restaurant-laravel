@@ -8,6 +8,7 @@ use App\Models\Option;
 use App\Models\OptionCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class SkyPizzeria_Options extends Seeder
 {
@@ -78,16 +79,21 @@ class SkyPizzeria_Options extends Seeder
         return [$option->id => ['option_category_id' => $option->category_id]];
       })->toArray();
 
+      $pizza_items = Menu::where('name', 'like', '%pizza%')->with('items')->get()->pluck('items')->flatten();
 
-      // Attach the crust options with cauliflower to the 10" items
-      $items_with_10_inch_crust = Item::where('name', 'like', '%10"%')->get();
-      $items_with_10_inch_crust->each(function (Item $item) use ($syncDataFor10Inch) {
+      // Attach the crust options with cauliflower to the 10" pizza items
+      $pizza_items_with_10_inch_crust = $pizza_items->filter(function ($item) {
+        return Str::contains($item->name, '10"');
+      });
+      $pizza_items_with_10_inch_crust->each(function (Item $item) use ($syncDataFor10Inch) {
         $item->options()->syncWithoutDetaching($syncDataFor10Inch);
       });
 
-      // Attach the crust options without cauliflower to other items
-      $items_without_10_inch_crust = Item::where('name', 'not like', '%10"%')->get();
-      $items_without_10_inch_crust->each(function (Item $item) use ($syncDataForOthers) {
+      // Attach the crust options without cauliflower to other pizza items
+      $pizza_items_without_10_inch_crust = $pizza_items->reject(function ($item) {
+        return Str::contains($item->name, '10"');
+      });
+      $pizza_items_without_10_inch_crust->each(function (Item $item) use ($syncDataForOthers) {
         $item->options()->syncWithoutDetaching($syncDataForOthers);
       });
     }
