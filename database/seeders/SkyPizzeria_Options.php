@@ -224,8 +224,8 @@ class SkyPizzeria_Options extends Seeder
           $trad_wings_sizes = [
             '6' => 0,
             '12' => 700,
-            '18' => 750,
-            '24' => 650,
+            '18' => 1450,
+            '24' => 2100,
           ];
 
           // Dry Rubs options

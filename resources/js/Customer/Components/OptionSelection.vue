@@ -35,6 +35,7 @@ const groupedOptions = computed(() => {
 const selectedCrust = ref(null);
 const selectedSauce = ref(null);
 const selectedCheeseBreadOption = ref(null);
+const selectedFlavor = ref(null);
 
 // PRICING
 
@@ -84,6 +85,14 @@ const calculateTotalPrice = computed(() => {
     }
   }
 
+  // Check if a size is selected and add its price
+  const selectedSizeOption = props.item.options.find(
+    (option) => option.category.name === "Sizes" && selectedOptions[option.id]
+  );
+  if (selectedSizeOption) {
+    price += selectedSizeOption.price;
+  }
+
   return price; // Return as integer
 });
 </script>
@@ -94,10 +103,29 @@ const calculateTotalPrice = computed(() => {
     <p class="block">Total Price: ${{ (calculateTotalPrice/100).toFixed(2) }}</p>
     <p class="text-2xl mb-3">Options </p>
     <div v-for="(options, category) in groupedOptions" :key="category">
-      <h3 class="uppercase font-black">{{ category }}</h3> <!-- Category label -->
+      <h3 v-if="category === 'Sauces' || category === 'Dry Rubs'" class="uppercase font-black">Flavors</h3>
+      <h4 v-else class="uppercase font-black">{{ category }}</h4> <!-- Other categories label -->
       <div v-for="option in options" :key="option.id">
-        <!-- Render option here -->
-        <label>
+        <!-- Flavor selection (either Sauce or Dry Rub) -->
+        <label v-if="category === 'Sauces' || category === 'Dry Rubs'">
+          <input
+            type="radio"
+            v-model="selectedFlavor"
+            :value="option.id"
+          />
+          {{ option.name }} <span class="text-xs italic">(${{(option.price/100).toFixed(2) }})</span>
+        </label>
+
+        <!-- Size selection -->
+        <label v-else-if="category === 'Sizes'">
+          <input
+            type="radio"
+            v-model="selectedOptions[option.id]"
+          />
+          {{ option.name }} <span class="text-xs italic">(${{(option.price/100).toFixed(2) }})</span>
+        </label>
+
+        <label v-else>
           <input
             v-if="category === 'Crust'"
             type="radio"
