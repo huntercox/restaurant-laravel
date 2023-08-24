@@ -47,13 +47,12 @@ class SkyPizzeria_Options extends Seeder
           }
 
           $topping_options = collect($toppings)->map(function ($topping) use ($toppings_category, $sizePrice) {
-            return Option::create([
-              'name' => ucfirst($topping),
-              'description' => ucfirst($topping) . ' topping',
-              'price' => $sizePrice,
-              'category_id' => $toppings_category->id,
-            ]);
+            return Option::firstOrCreate(
+              ['name' => ucfirst($topping), 'category_id' => $toppings_category->id],
+              ['description' => ucfirst($topping) . ' topping', 'price' => $sizePrice]
+            );
           });
+
 
           $syncData = $topping_options->mapWithKeys(function ($option) {
             return [$option->id => ['option_category_id' => $option->category_id]];
@@ -83,12 +82,10 @@ class SkyPizzeria_Options extends Seeder
             $extraCheesePrice = 225; // $2.25 in cents for 14" pizza
           }
 
-          $extra_cheese_option = Option::create([
-            'name' => 'Extra Cheese',
-            'description' => 'Extra cheese topping',
-            'price' => $extraCheesePrice,
-            'category_id' => $extra_cheese_category->id,
-          ]);
+          $extra_cheese_option = Option::firstOrCreate(
+            ['name' => 'Extra Cheese', 'category_id' => $extra_cheese_category->id],
+            ['description' => 'Extra cheese topping', 'price' => $extraCheesePrice]
+          );
 
           $item->options()->attach($extra_cheese_option->id, ['option_category_id' => $extra_cheese_category->id]);
         });
@@ -100,20 +97,16 @@ class SkyPizzeria_Options extends Seeder
       $crust_category = OptionCategory::firstOrCreate(['name' => 'Crust']);
 
       $crust_options = collect(['thin', 'hand-tossed'])->map(function ($crust) use ($crust_category) {
-        return Option::create([
-          'name' => ucfirst($crust),
-          'description' => ucfirst($crust) . ' crust',
-          'price' => 0,
-          'category_id' => $crust_category->id,
-        ]);
+        return Option::firstOrCreate(
+          ['name' => ucfirst($crust), 'category_id' => $crust_category->id],
+          ['description' => ucfirst($crust) . ' crust', 'price' => 0]
+        );
       });
 
-      $cauliflower_option = Option::create([
-        'name' => 'Cauliflower',
-        'description' => 'Cauliflower crust',
-        'price' => 0,
-        'category_id' => $crust_category->id,
-      ]);
+      $cauliflower_option = Option::firstOrCreate(
+        ['name' => 'Cauliflower', 'category_id' => $crust_category->id],
+        ['description' => 'Cauliflower crust', 'price' => 0]
+      );
 
       $crust_options->push($cauliflower_option);
 
@@ -157,12 +150,10 @@ class SkyPizzeria_Options extends Seeder
 
       // SAUCES-traditional pizza sauce, bbq, ranch, buffalo mild, buffalo hot
       $sauce_options = collect(['pizza', 'bbq', 'ranch', 'buffalo mild', 'buffalo hot'])->map(function ($sauce) use ($sauce_category) {
-        return Option::create([
-          'name' => ucfirst($sauce),
-          'description' => ucfirst($sauce) . ' sauce',
-          'price' => 0,
-          'category_id' => $sauce_category->id,
-        ]);
+        return Option::firstOrCreate(
+          ['name' => ucfirst($sauce), 'category_id' => $sauce_category->id],
+          ['description' => ucfirst($sauce) . ' sauce', 'price' => 0]
+        );
       });
 
       $syncDataForSauces = $sauce_options->mapWithKeys(function ($option) {
