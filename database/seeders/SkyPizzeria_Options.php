@@ -168,5 +168,38 @@ class SkyPizzeria_Options extends Seeder
         $item->options()->syncWithoutDetaching($syncDataForSauces);
       });
 
+    // =======================================================================================================
+  // =======================================================================================================
+    // =======================================================================================================
+
+      /**
+       * Cheese Breads - single item with options
+       */
+        $cheese_bread = Item::where('name', 'Cheese Bread')->where('price',  999)->first();
+
+        if ($cheese_bread) {
+          // Create or get the Cheese Bread Options category
+          $cheese_bread_options_category = OptionCategory::firstOrCreate(['name' => 'Cheese Bread Options']);
+
+          // Define the Cheese Bread options
+          $cheese_bread_options = [
+            'Pepperoni' => 100, // $1.00 in cents
+            'Ham' => 100,       // $1.00 in cents
+            'Bacon' => 100,     // $1.00 in cents
+            'All Meat' => 200   // $2.00 in cents
+          ];
+
+          // Iterate over the options and create or get them, then attach to the Cheese Bread item
+          foreach ($cheese_bread_options as $option_name => $option_price) {
+            $option = Option::firstOrCreate(
+              ['name' => $option_name, 'category_id' => $cheese_bread_options_category->id],
+              ['description' => $option_name, 'price' => $option_price]
+            );
+
+            $cheese_bread->options()->syncWithoutDetaching([$option->id => ['option_category_id' => $cheese_bread_options_category->id]]);
+          }
+        }
+
+
     }
 }

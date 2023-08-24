@@ -34,6 +34,7 @@ const groupedOptions = computed(() => {
 });
 const selectedCrust = ref(null);
 const selectedSauce = ref(null);
+const selectedCheeseBreadOption = ref(null);
 
 // PRICING
 
@@ -73,6 +74,16 @@ const calculateTotalPrice = computed(() => {
     }
   }
 
+  // Adding the price for the selected Cheese Bread Option
+  if (selectedCheeseBreadOption.value) {
+    const selectedOption = props.item.options.find(
+      (option) => option.id === selectedCheeseBreadOption.value
+    );
+    if (selectedOption) {
+      price += selectedOption.price;
+    }
+  }
+
   return price; // Return as integer
 });
 </script>
@@ -97,6 +108,12 @@ const calculateTotalPrice = computed(() => {
             v-else-if="category === 'Sauce'"
             type="radio"
             v-model="selectedSauce"
+            :value="option.id"
+          />
+          <input
+            v-else-if="category === 'Cheese Bread Options'"
+            type="radio"
+            v-model="selectedCheeseBreadOption"
             :value="option.id"
           />
           <input
