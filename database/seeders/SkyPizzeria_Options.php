@@ -200,6 +200,58 @@ class SkyPizzeria_Options extends Seeder
           }
         }
 
+        /**
+         * Wings - traditional/boneless
+         */
+        $trad_wings = Item::where('name', 'Traditional Wings')->first();
+        $boneless_wings = Item::where('name', 'Boneless Wings')->first();
+
+        if ($trad_wings) {
+          // Create or get the Traditional Wings Options categories
+          $trad_wings_sauces_category = OptionCategory::firstOrCreate(['name' => 'Sauces']);
+          $trad_wings_sizes_category = OptionCategory::firstOrCreate(['name' => 'Sizes']);
+          $trad_wings_rubs_category = OptionCategory::firstOrCreate(['name' => 'Dry Rubs']);
+
+          // Define the Traditional Wings options
+          $trad_wings_sauces = [
+            'BBQ' => 0,
+            'Buffalo Hot' => 0,
+            'Buffalo Mild' => 0,
+            'Teriyaki' => 0,
+          ];
+
+          // Sizes options
+          $trad_wings_sizes = [
+            '6' => 0,
+            '12' => 700,
+            '18' => 750,
+            '24' => 650,
+          ];
+
+          // Dry Rubs options
+          $trad_wings_rubs = [
+            'Cajun' => 0,
+            'Mesquite' => 0,
+            'Ranch' => 0,
+            'Nashville Hot' => 0,
+          ];
+
+          // Function to handle options creation and attachment
+          $handleOptions = function ($options, $category, $item) {
+            foreach ($options as $option_name => $option_price) {
+              $option = Option::firstOrCreate(
+                ['name' => $option_name, 'category_id' => $category->id],
+                ['description' => $option_name, 'price' => $option_price]
+              );
+              $item->options()->syncWithoutDetaching([$option->id => ['option_category_id' => $category->id]]);
+            }
+          };
+
+          // Apply the function for Sauces, Sizes, and Dry Rubs
+          $handleOptions($trad_wings_sauces, $trad_wings_sauces_category, $trad_wings);
+          $handleOptions($trad_wings_sizes, $trad_wings_sizes_category, $trad_wings);
+          $handleOptions($trad_wings_rubs, $trad_wings_rubs_category, $trad_wings);
+        }
 
     }
 }

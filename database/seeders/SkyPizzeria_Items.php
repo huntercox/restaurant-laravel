@@ -367,6 +367,18 @@ class SkyPizzeria_Items extends Seeder
 
       $wings_menu = Menu::create(['name' => 'Wings']);
 
+      $wings_traditional = Item::create([
+        'name' => 'Traditional Wings',
+        'description' => "Traditional wings.",
+        'price' => round(7.99 * 100),
+      ]);
+
+      $wings_boneless = Item::create([
+        'name' => 'Boneless Wings',
+        'description' => "Boneless wings.",
+        'price' => round(7.99 * 100),
+      ]);
+
       $wings_trad_6 = Item::create([
         'name' => 'Traditional Wings 6',
         'description' => "6 traditional wings.",
@@ -407,6 +419,15 @@ class SkyPizzeria_Items extends Seeder
         'name' => 'Boneless Wings 24',
         'description' => "24 boneless wings.",
         'price' => round(29.99 * 100),
+      ]);
+
+      MenuItem::create([
+        'menu_id' => $wings_menu->id,
+        'item_id' => $wings_traditional->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $wings_menu->id,
+        'item_id' => $wings_boneless->id,
       ]);
 
       MenuItem::create([
@@ -1018,6 +1039,8 @@ class SkyPizzeria_Items extends Seeder
         'menu_id' => $extras_menu->id,
         'item_id' => $bbq_cup->id,
       ]);
+
+
 
 
     }
