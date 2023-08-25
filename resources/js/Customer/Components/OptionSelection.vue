@@ -36,6 +36,8 @@ const selectedCrust = ref(null);
 const selectedSauce = ref(null);
 const selectedCheeseBreadOption = ref(null);
 const selectedFlavor = ref(null);
+const selectedSize = ref(null);
+
 
 // PRICING
 
@@ -87,8 +89,9 @@ const calculateTotalPrice = computed(() => {
 
   // Check if a size is selected and add its price
   const selectedSizeOption = props.item.options.find(
-    (option) => option.category.name === "Sizes" && selectedOptions[option.id]
+    (option) => option.id === selectedSize.value
   );
+
   if (selectedSizeOption) {
     price += selectedSizeOption.price;
   }
@@ -120,7 +123,8 @@ const calculateTotalPrice = computed(() => {
         <label v-else-if="category === 'Sizes'">
           <input
             type="radio"
-            v-model="selectedOptions[option.id]"
+            v-model="selectedSize"
+            :value="option.id"
           />
           {{ option.name }} <span class="text-xs italic">(${{(option.price/100).toFixed(2) }})</span>
         </label>
