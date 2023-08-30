@@ -7,6 +7,7 @@ import PizzaOptions from './Options/PizzaOptions.vue';
 const props = defineProps({
   options: Array,
   item: Object,
+  selectedMenu: Object,
 });
 
 const selectedOptions = ref({});
@@ -41,11 +42,16 @@ const selectedCrust = ref(null);
 provide('selectedCrust', selectedCrust);
 const selectedSauce = ref(null);
 provide('selectedSauce', selectedSauce);
+// Extract the number of included toppings from the item name
+const includedToppings = ref(0);
+if (props.item.name.match(/(\d+) Topping/)) {
+  includedToppings.value = parseInt(RegExp.$1);
+}
+
 
 // Wings
 const selectedFlavor = ref(null);
 provide('selectedFlavor', selectedFlavor);
-
 const selectedSize = ref(null);
 provide('selectedSize', selectedSize);
 
@@ -118,47 +124,14 @@ const calculateTotalPrice = computed(() => {
       <p>No options available</p>
     </div>
 
-    <div v-if="props.item?.name === 'Traditional Wings' || props.item?.name === 'Boneless Wings'">
+    <div v-if="selectedMenu?.name === 'Wings'">
       <WingsOptions :groupedOptions="groupedOptions" />
     </div>
 
 
-    <PizzaOptions :groupedOptions="groupedOptions" />
-
-<!--    <div v-for="(options, category) in groupedOptions" :key="category">-->
-<!--      <h3 class="uppercase font-black">{{ category }}</h3>-->
-<!--      <div v-for="option in options" :key="option.id">-->
-<!--        <label>-->
-<!--          &lt;!&ndash; Pizza options &ndash;&gt;-->
-<!--          <input-->
-<!--            v-if="category === 'Crust'"-->
-<!--            type="radio"-->
-<!--            v-model="selectedCrust"-->
-<!--            :value="option.id"-->
-<!--          />-->
-<!--          <input-->
-<!--            v-else-if="category === 'Sauce'"-->
-<!--            type="radio"-->
-<!--            v-model="selectedSauce"-->
-<!--            :value="option.id"-->
-<!--          />-->
-<!--          &lt;!&ndash; Cheese bread options&ndash;&gt;-->
-<!--          <input-->
-<!--            v-else-if="category === 'Cheese Bread Options'"-->
-<!--            type="radio"-->
-<!--            v-model="selectedCheeseBreadOption"-->
-<!--            :value="option.id"-->
-<!--          />-->
-<!--          &lt;!&ndash; All options &ndash;&gt;-->
-<!--          <input-->
-<!--            v-else-->
-<!--            type="checkbox"-->
-<!--            v-model="selectedOptions[option.id]"-->
-<!--          />-->
-<!--          {{ option.name }} <span class="text-xs italic">(${{(option.price/100).toFixed(2) }})</span>-->
-<!--        </label>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div v-if="selectedMenu?.name === 'Pizza'">
+      <PizzaOptions :groupedOptions="groupedOptions" />
+    </div>
 
     <button @click="addCartItemWithSelectedOptions" class="text-white rounded-sm bg-red-500 py-2 pt-2 mb-2 leading-2 px-2 mt-4 text-sm uppercase font-semibold hover:bg-red-400">Add to Cart</button>
   </div>

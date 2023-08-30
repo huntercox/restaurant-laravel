@@ -33,12 +33,14 @@ function updateCart() {
 
 const showOptionsModal = ref(false);
 const selectedItem = ref(null);
+const selectedMenu = ref(null);
 const selectedItemOptions = ref([]);
 
-function orderItem(item) {
+function orderItem(item, menu) {
   // Show the modal and populate the selected item and options
   showOptionsModal.value = true;
   selectedItem.value = item;
+  selectedMenu.value = menu;
   // You might need to fetch or populate the options for the selected item
   selectedItemOptions.value = item.options || [];
 }
@@ -61,7 +63,7 @@ function closeOptionsModal() {
         </button>
       </div>
       <!-- Content of the modal goes here -->
-      <OptionSelection :item="selectedItem" />
+      <OptionSelection :item="selectedItem" :selectedMenu="selectedMenu" />
     </div>
   </div>
 
@@ -71,7 +73,7 @@ function closeOptionsModal() {
 		<div class="max-w-7xl mx-auto">
 			<div class="grid-cols-1 md:grid-cols-2 grid gap-2">
 
-				<div class="w-full bg-gray-200 border border-red-600" v-for=" menu in menus" :key="menu.id" :menu="menu">
+				<div class="w-full bg-gray-200 border border-red-600" v-for="menu in menus" :key="menu.id" :menu="menu">
 					<div class="bg-red-600 text-white uppercase p-3">
 						<p class="font-black">{{ menu.name }}</p>
 					</div>
@@ -88,7 +90,7 @@ function closeOptionsModal() {
 							</div>
 							<!-- <button @click="addToCart(item)">Add to Cart</button> -->
 							<div class="flex justify-end">
-                <button @click="orderItem(item)" class="rounded-sm bg-red-500 py-1 pt-2 mb-2 leading-4 align-middle px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">Order</button>
+                <button @click="orderItem(item, menu)" class="rounded-sm bg-red-500 py-1 pt-2 mb-2 leading-4 align-middle px-2 my-1 text-sm uppercase font-semibold hover:bg-red-400">Order</button>
 							</div>
 						</div>
 					</div>
