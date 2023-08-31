@@ -131,7 +131,6 @@ const calculateTotalPrice = computed(() => {
       <WingsOptions :groupedOptions="groupedOptions" />
     </div>
 
-
     <div v-if="selectedMenu?.name === 'Pizza'">
       <PizzaOptions :groupedOptions="groupedOptions" />
     </div>

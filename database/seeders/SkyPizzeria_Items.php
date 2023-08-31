@@ -472,6 +472,13 @@ class SkyPizzeria_Items extends Seeder
         'description' => "Breadsticks & Marinara sauce.",
         'price' => round(5.49 * 100),
       ]);
+
+      $deep_fried_ravioli = Item::create([
+        'name' => 'Deep Fried Ravioli',
+        'description' => "Deep fried ravioli w/ Marinara sauce.",
+        'price' => round(4.99 * 100),
+      ]);
+
       $deep_fried_ravioli_10_cheese = Item::create([
         'name' => 'Deep Fried Ravioli - Four Cheese - 10pc',
         'description' => "10 pieces of deep fried four-cheese ravioli w/ Marinara sauce.",
@@ -496,6 +503,10 @@ class SkyPizzeria_Items extends Seeder
       MenuItem::create([
         'menu_id' => $appetizers_menu->id,
         'item_id' => $breadsticks->id,
+      ]);
+      MenuItem::create([
+        'menu_id' => $appetizers_menu->id,
+        'item_id' => $deep_fried_ravioli->id,
       ]);
       MenuItem::create([
         'menu_id' => $appetizers_menu->id,

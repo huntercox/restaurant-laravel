@@ -305,7 +305,40 @@ class SkyPizzeria_Options extends Seeder
 
         }
 
+    /**
+     * Deep Fried Ravioli
+     */
+      $deep_fried_ravioli = Item::where('name', 'Deep Fried Ravioli')->first();
 
+      if ( $deep_fried_ravioli ) {
+
+        $deep_fried_ravioli_sizes_category = OptionCategory::firstOrCreate(['name' => 'Sizes']);
+        $deep_fried_ravioli_filling_category = OptionCategory::firstOrCreate(['name' => 'Filling']);
+
+        $deep_fried_ravioli_sizes = [
+          '10' => 0,
+          '20' => 400,
+        ];
+
+        $deep_fried_ravioli_filling = [
+          'Four Cheese' => 0,
+          'Beef' => 0,
+        ];
+
+        $handleOptions = function ($options, $category, $item) {
+          foreach ($options as $option_name => $option_price) {
+            $option = Option::firstOrCreate(
+              ['name' => $option_name, 'category_id' => $category->id],
+              ['description' => $option_name, 'price' => $option_price]
+            );
+            $item->options()->syncWithoutDetaching([$option->id => ['option_category_id' => $category->id]]);
+          }
+        };
+
+        $handleOptions($deep_fried_ravioli_sizes, $deep_fried_ravioli_sizes_category, $deep_fried_ravioli);
+        $handleOptions($deep_fried_ravioli_filling, $deep_fried_ravioli_filling_category, $deep_fried_ravioli);
+
+      }
 
     }
 }
