@@ -3,6 +3,7 @@ import { ref, computed, provide } from 'vue';
 import { router } from '@inertiajs/vue3';
 import WingsOptions from './Options/WingsOptions.vue';
 import PizzaOptions from './Options/PizzaOptions.vue';
+import CheeseBreadOptions from './Options/CheeseBreadOptions.vue';
 
 const props = defineProps({
   options: Array,
@@ -58,6 +59,8 @@ provide('selectedSize', selectedSize);
 
 
 const selectedCheeseBreadOption = ref(null);
+provide('selectedCheeseBreadOption', selectedCheeseBreadOption);
+
 
 // PRICING
 
@@ -131,6 +134,10 @@ const calculateTotalPrice = computed(() => {
 
     <div v-if="selectedMenu?.name === 'Pizza'">
       <PizzaOptions :groupedOptions="groupedOptions" />
+    </div>
+
+    <div v-if="selectedMenu?.name === 'Cheese Breads'">
+      <CheeseBreadOptions :groupedOptions="groupedOptions" />
     </div>
 
     <button @click="addCartItemWithSelectedOptions" class="text-white rounded-sm bg-red-500 py-2 pt-2 mb-2 leading-2 px-2 mt-4 text-sm uppercase font-semibold hover:bg-red-400">Add to Cart</button>
