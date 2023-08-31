@@ -1,9 +1,10 @@
 <script setup>
 import { ref, computed, provide } from 'vue';
 import { router } from '@inertiajs/vue3';
-import WingsOptions from './Options/WingsOptions.vue';
-import PizzaOptions from './Options/PizzaOptions.vue';
-import CheeseBreadOptions from './Options/CheeseBreadOptions.vue';
+import WingsOptions from '@/Customer/Components/Options/WingsOptions.vue';
+import PizzaOptions from '@/Customer/Components/Options/PizzaOptions.vue';
+import CheeseBreadOptions from '@/Customer/Components/Options/CheeseBreadOptions.vue';
+import DeepFriedRavioliOptions from "@/Customer/Components/Options/DeepFriedRavioliOptions.vue";
 
 const props = defineProps({
   options: Array,
@@ -57,14 +58,21 @@ const selectedSize = ref(null);
 provide('selectedSize', selectedSize);
 
 
-
+// Cheese Bread
 const selectedCheeseBreadOption = ref(null);
 provide('selectedCheeseBreadOption', selectedCheeseBreadOption);
 
+// Deep Fried Ravioli
+const selectedDeepFriedRavioliSize = ref(null);
+provide('selectedDeepFriedRavioliSize', selectedDeepFriedRavioliSize);
+const selectedDeepFriedRavioliFilling = ref(null);
+provide('selectedDeepFriedRavioliFilling', selectedDeepFriedRavioliFilling);
 
-// PRICING
 
-// Modified Pricing Calculation
+/*
+------------------------------------------------------------------------------------
+*/
+/* PRICING */
 const calculateTotalPrice = computed(() => {
   let price = props.item.price; // Start with the base item price
 
@@ -138,6 +146,12 @@ const calculateTotalPrice = computed(() => {
     <div v-if="selectedMenu?.name === 'Cheese Breads'">
       <CheeseBreadOptions :groupedOptions="groupedOptions" />
     </div>
+
+    <div v-if="selectedMenu?.name === 'Appetizers'">
+      <DeepFriedRavioliOptions :groupedOptions="groupedOptions" />
+    </div>
+
+
 
     <button @click="addCartItemWithSelectedOptions" class="text-white rounded-sm bg-red-500 py-2 pt-2 mb-2 leading-2 px-2 mt-4 text-sm uppercase font-semibold hover:bg-red-400">Add to Cart</button>
   </div>
